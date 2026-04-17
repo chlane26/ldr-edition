@@ -258,7 +258,7 @@
         </section>
     </main>
 
-    <main id="boutique" class="page">
+      <main id="boutique" class="page">
         <h1 class="section-title">Catalogue Complet</h1>
         
         <h3 class="section-title" style="border-top: 1px solid #333; padding-top: 40px;">Version Française</h3>
@@ -308,13 +308,10 @@
             </div>
         </div>
 
-       <h3 class="section-title" style="border-top: 1px solid #333; padding-top: 40px;">English Version</h3>
+        <h3 class="section-title" style="border-top: 1px solid #333; padding-top: 40px;">English Version</h3>
         <div class="books-grid">
-            
             <div class="book-card">
-                <div class="book-cover">
-                    <img src="images/evidence.jpg.jpg" alt="The Piece Of Evidence" style="max-width: 100%; height: auto; border-radius: 4px;">
-                </div>
+                <div class="book-cover">[Image: The Piece Of Evidence]</div>
                 <h3>The Piece Of Evidence</h3>
                 <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 10px;">The Jefferson Case</p>
                 <p class="book-price">28.95 $</p>
@@ -322,7 +319,7 @@
                     <button class="btn-cart" onclick="addToCart('The Piece Of Evidence', 28.95)">+ Panier</button>
                     <a href="https://www.amazon.ca/dp/B0GTTZD5GV" target="_blank" class="btn-amazon">Amazon</a>
                 </div>
-            </div> </div> ```
+            </div>
 
             <div class="book-card">
                 <div class="book-cover">[Image: Silence Has A Price]</div>
@@ -358,6 +355,18 @@
             </div>
         </div>
     </main>
+
+    <main id="panier-page" class="page">
+        <h2 class="section-title">Votre Panier / Your Cart</h2>
+        <div class="cart-container">
+            <div id="cart-items-list">
+                <p style="text-align:center;">Votre panier est vide.</p>
+            </div>
+            <div class="cart-total">Total: <span id="cart-total-price">0.00</span> $</div>
+            <button class="btn-checkout" onclick="alert('Redirection vers la plateforme de paiement sécurisée...')">Procéder au paiement</button>
+        </div>
+    </main>
+
 
     <main id="panier-page" class="page">
         <h2 class="section-title">Votre Panier / Your Cart</h2>
