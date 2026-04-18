@@ -7,6 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LDR Édition | Suspense & Thrillers</title>
     <style>
+        header, nav {
+    position: relative;
+    z-index: 9999; /* Met le menu au premier plan */
+}
+
+.carousel-container, .books-grid {
+    position: relative;
+    z-index: 1; /* Garde les livres en arrière-plan par rapport au menu */
+}
         .books-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
