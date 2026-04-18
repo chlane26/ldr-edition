@@ -258,21 +258,13 @@
         </nav>
     </header>
 
-    <main id="accueil" class="page active">
-        <section class="hero">
-            <h1>Mon Univers & My Universe</h1>
-            <p>La persévérance au service du suspense & de l'amour.</p>
-            <button class="btn-cart" onclick="showPage('boutique')" style="margin: 20px auto; width: 250px;">Voir la boutique</button>
-        </section>
-    </main>
-
     <main id="boutique" class="page">
         <h1 class="section-title">Catalogue Complet</h1>
         
         <h3 class="section-title" style="border-top: 1px solid #333; padding-top: 40px;">Version Française</h3>
         <div class="books-grid">
             <div class="book-card">
-                 <div class="book-cover"><img src="images/piece.jpg.png" alt="La Pièce À Conviction" style="width: 100%; max-height: 350px; object-fit: contain; display: block; border-radius: 4px;"></div>
+                <img src="piece.jpg" alt="La Pièce À Conviction" class="book-cover">
                 <h3>La Pièce À Conviction</h3>
                 <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 10px;">L'Affaire Jefferson</p>
                 <p class="book-price">26.95 $</p>
@@ -283,8 +275,7 @@
             </div>
 
             <div class="book-card">
-                <div class="book-cover">
-                    <div class="book-cover">
+                <div class="book-cover">[Image: Le Silence A Un Prix]</div>
                 <h3>Le Silence A Un Prix</h3>
                 <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 10px;">L'Affaire Jefferson</p>
                 <p class="book-price">25.95 $</p>
@@ -295,8 +286,7 @@
             </div>
 
             <div class="book-card">
-                <div class="book-cover">
-                   
+                <div class="book-cover">[Image: La Règle Non Écrite]</div>
                 <h3>La Règle Non Écrite</h3>
                 <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 10px;">L'Affaire Jefferson</p>
                 <p class="book-price">25.95 $</p>
@@ -318,44 +308,40 @@
             </div>
         </div>
 
-      <h3 class="section-title" style="border-top: 1px solid #333; padding-top: 40px;">English Version</h3>
-<div class="books-grid">
+        <h3 class="section-title" style="border-top: 1px solid #333; padding-top: 40px;">English Version</h3>
+        <div class="books-grid">
+            <div class="book-card">
+                <div class="book-cover">[Image: The Piece Of Evidence]</div>
+                <h3>The Piece Of Evidence</h3>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 10px;">The Jefferson Case</p>
+                <p class="book-price">28.95 $</p>
+                <div class="btn-group">
+                    <button class="btn-cart" onclick="addToCart('The Piece Of Evidence', 28.95)">+ Panier</button>
+                    <a href="https://www.amazon.ca/dp/B0GTTZD5GV" target="_blank" class="btn-amazon">Amazon</a>
+                </div>
+            </div>
 
-    <div class="book-card">
-        <div class="book-cover">
-            <img src="images/evidence.jpg.png" alt="The Piece Of Evidence">
-        </div>
-        <h3>The Piece Of Evidence</h3>
-        <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 10px;">The Jefferson Case</p>
-        <p class="book-price">28.95 $</p>
-        <div class="btn-group">
-            <button class="btn-cart" onclick="addToCart('The Piece Of Evidence', 28.95)">+ Panier</button>
-            <a href="https://www.amazon.ca/dp/B0GTTZD5GV" target="_blank" class="btn-amazon">Amazon</a>
-        </div>
-    </div> <div class="book-card">
-        <div class="book-cover">
-            <img src="images/silenceeng.jpg.png" alt="Silence Has A Price">
-        </div>
-        <h3>Silence Has A Price</h3>
-        <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 10px;">The Jefferson Case</p>
-        <p class="book-price">27.95 $</p>
-        <div class="btn-group">
-            <button class="btn-cart" onclick="addToCart('Silence Has A Price', 27.95)">+ Panier</button>
-            <a href="https://www.amazon.ca/dp/B0GV32RWSY" target="_blank" class="btn-amazon">Amazon</a>
-        </div>
-    </div> </div> ```
-    </div> <div class="book-card">
-        <div class="book-cover">
-            <img src="images/rule.jpg.png" alt="An Unwritten Rule">
-        </div>
-        <h3>An Unwritten Rule</h3>
-        <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 10px;">The Jefferson Case - Vol. 3</p>
-        <p class="book-price">28.95 $</p>
-        <div class="btn-group">
-            <button class="btn-cart" onclick="addToCart('An Unwritten Rule', 28.95)">+ Panier</button>
-            <a href="https://www.amazon.ca" target="_blank" class="btn-amazon">Amazon</a>
-        </div>
-    </div> </div> ```
+            <div class="book-card">
+                <div class="book-cover">[Image: Silence Has A Price]</div>
+                <h3>Silence Has A Price</h3>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 10px;">The Jefferson Case</p>
+                <p class="book-price">27.95 $</p>
+                <div class="btn-group">
+                    <button class="btn-cart" onclick="addToCart('Silence Has A Price', 27.95)">+ Panier</button>
+                    <a href="https://www.amazon.ca/dp/B0GV32RWSY" target="_blank" class="btn-amazon">Amazon</a>
+                </div>
+            </div>
+
+            <div class="book-card">
+                <div class="book-cover">[Image: An Unwritten Rule]</div>
+                <h3>An Unwritten Rule</h3>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 10px;">The Jefferson Case</p>
+                <p class="book-price">28.95 $</p>
+                <div class="btn-group">
+                    <button class="btn-cart" onclick="addToCart('An Unwritten Rule', 28.95)">+ Panier</button>
+                    <a href="https://www.amazon.ca" target="_blank" class="btn-amazon">Amazon</a>
+                </div>
+            </div>
 
             <div class="book-card">
                 <div class="book-cover">[Image: A Life On A Multiplayer Mode]</div>
@@ -369,6 +355,18 @@
             </div>
         </div>
     </main>
+
+    <main id="panier-page" class="page">
+        <h2 class="section-title">Votre Panier / Your Cart</h2>
+        <div class="cart-container">
+            <div id="cart-items-list">
+                <p style="text-align:center;">Votre panier est vide.</p>
+            </div>
+            <div class="cart-total">Total: <span id="cart-total-price">0.00</span> $</div>
+            <button class="btn-checkout" onclick="alert('Redirection vers la plateforme de paiement sécurisée...')">Procéder au paiement</button>
+        </div>
+    </main>
+
 
     <main id="panier-page" class="page">
         <h2 class="section-title">Votre Panier / Your Cart</h2>
