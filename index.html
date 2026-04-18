@@ -13,7 +13,39 @@
     gap: 30px;
     padding: 20px;
 }
+.carousel-container {
+    position: relative;
+    max-width: 400px; /* On veut un seul livre bien centré */
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
+.book-slide {
+    text-align: center;
+    background-color: #1e1e1e;
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid #333;
+}
+
+.prev, .next {
+    cursor: pointer;
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    font-weight: bold;
+    font-size: 24px;
+    padding: 10px;
+    border: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+.prev { left: -50px; }
+.next { right: -50px; }
 .book-card {
     background-color: #1e1e1e;
     padding: 15px;
@@ -278,6 +310,7 @@
     </style>
 </head>
 <body>
+    
 
     <header>
         <div class="logo" onclick="showPage('accueil')">LDR <span>Édition</span></div>
@@ -301,16 +334,31 @@
         <h1 class="section-title">Catalogue Complet</h1>
         
         <h3 class="section-title" style="border-top: 1px solid #333; padding-top: 40px;">Version Française</h3>
-        <div class="books-grid">
-            <div class="book-card"><div class="book-card"><img src="images/piece.jpg.png" alt="La Pièce À Conviction" style="width: 100%; max-height: 350px; object-fit: contain; display: block; border-radius: 4px;">  
-                <h3>La Pièce À Conviction</h3>
-                <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 10px;">L'Affaire Jefferson</p>
-                <p class="book-price">26.95 $</p>
-                <div class="btn-group">
-                    <button class="btn-cart" onclick="addToCart('La Pièce À Conviction', 26.95)">+ Panier</button>
-                    <a href="https://www.amazon.ca/dp/B0GLJHVSCH" target="_blank" class="btn-amazon">Amazon</a>
-                </div>
+        <<div class="carousel-container">
+    <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+
+    <div class="carousel-wrapper">
+        <div class="book-slide">
+            <div class="book-cover">
+                <img src="images/piece.jpg.png" alt="Livre 1">
             </div>
+            <h3>La Pièce À Conviction</h3>
+            <p class="book-price">26.95 $</p>
+            <a href="LIEN_AMAZON" class="btn-amazon">Voir sur Amazon</a>
+        </div>
+
+        <div class="book-slide" style="display:none;">
+            <div class="book-cover">
+                <img src="images/slience.jpg.png" alt="Livre 2">
+            </div>
+            <h3>Le Silence A Un Prix</h3>
+            <p class="book-price">27.95 $</p>
+            <a href="LIEN_AMAZON" class="btn-amazon">Voir sur Amazon</a>
+        </div>
+    </div>
+
+    <button class="next" onclick="moveSlide(1)">&#10095;</button>
+</div>
 
        
                 <div class="book-grid">
@@ -467,6 +515,16 @@
             
             totalDisplay.innerText = currentTotal.toFixed(2);
         }
+        <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll(".book-slide");
+
+    function moveSlide(step) {
+        slides[currentSlide].style.display = "none"; // Cache le livre actuel
+        currentSlide = (currentSlide + step + slides.length) % slides.length;
+        slides[currentSlide].style.display = "block"; // Affiche le nouveau
+    }
+</script>
     </script>
 </body>
 </html>
