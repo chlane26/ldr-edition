@@ -101,16 +101,23 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
         }
 
-        .book-cover {
+       .book-cover {
             width: 100%;
-            height: 400px;
-            background-color: #2a2a2a;
-            margin-bottom: 20px;
+            height: 320px; /* C'est cette ligne qui force l'alignement ! */
+            background-color: #1a1a1a; /* Ton gris anthracite */
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid #333;
-            object-fit: cover;
+            overflow: hidden;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+
+        .book-cover img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain; /* Empêche la déformation */
+            display: block;
         }
 
         .btn-group {
