@@ -2,90 +2,16 @@
 <html lang="fr-CA">
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="LDR Édition - Romans à suspense et thrillers psychologiques par Charles Lane D. Roches.">
-<meta name="keywords" content="ldredition, ldr-edition, LDR Édition, Charles Lane D. Roches, thriller québécois">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LDR Édition | Suspense & Thrillers</title>
     <style>
-        header, nav {
-    position: relative;
-    z-index: 9999; /* Met le menu au premier plan */
-}
-
-.carousel-container, .books-grid {
-    position: relative;
-    z-index: 1; /* Garde les livres en arrière-plan par rapport au menu */
-}
-        .books-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 30px;
-    padding: 20px;
-}
-.carousel-container {
-    position: relative;
-    max-width: 400px; /* On veut un seul livre bien centré */
-    margin: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.book-slide {
-    text-align: center;
-    background-color: #1e1e1e;
-    padding: 30px;
-    border-radius: 12px;
-    border: 1px solid #333;
-}
-
-.prev, .next {
-    cursor: pointer;
-    background-color: rgba(0,0,0,0.5);
-    color: white;
-    font-weight: bold;
-    font-size: 24px;
-    padding: 10px;
-    border: none;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
-}
-
-.prev { left: -50px; }
-.next { right: -50px; }
-.book-card {
-    background-color: #1e1e1e;
-    padding: 15px;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    /* On laisse la carte respirer, mais on s'assure qu'elle est un bloc fermé */
-}
-
-.book-cover {
-    width: 100%;
-    height: 350px; /* La hauteur fixe pour TOUS tes rectangles photo */
-    background-color: #121212;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    margin-bottom: 15px;
-}
-
-.book-cover img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain; /* Ta photo ne dépassera JAMAIS du cadre */
-}
         :root {
             --bg-color: #121212;
             --surface-color: #1e1e1e;
             --text-main: #f0f0f0;
             --text-muted: #aaaaaa;
             --accent-red: #8b0000;
+            --accent-hover: #5c0000;
         }
 
         body {
@@ -144,7 +70,7 @@
         .hero {
             text-align: center;
             padding: 100px 20px;
-            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9)), url('https://via.placeholder.com/1920x600/121212/000000');
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9));
             background-size: cover;
         }
 
@@ -156,43 +82,73 @@
             letter-spacing: 2px;
         }
 
-        /* Boutique */
-        .books-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 40px;
-            padding: 0 50px 80px;
-            max-width: 1200px;
-            margin: 0 auto;
+        /* Carrousel Styles */
+        .carousel-container {
+            position: relative;
+            max-width: 450px;
+            margin: 0 auto 80px;
+            padding: 0 20px;
         }
 
-        .book-card {
+        .book-slide {
+            display: none; /* Caché par défaut */
             background-color: var(--surface-color);
-            padding: 20px;
-            border-radius: 5px;
+            padding: 30px;
+            border-radius: 8px;
             text-align: center;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.5s;
         }
 
-       .book-cover {
+        .book-slide.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .book-cover {
             width: 100%;
-            height: 320px; /* C'est cette ligne qui force l'alignement ! */
-            background-color: #1a1a1a; /* Ton gris anthracite */
+            height: 400px;
+            background-color: #121212;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
+            border: 1px solid #333;
             overflow: hidden;
-            margin-bottom: 15px;
-            border-radius: 4px;
         }
 
         .book-cover img {
             max-width: 100%;
             max-height: 100%;
-            object-fit: contain; /* Empêche la déformation */
-            display: block;
+            object-fit: contain;
         }
 
+        /* Flèches */
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -50px;
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            background-color: rgba(0,0,0,0.8);
+            border: none;
+            z-index: 10;
+        }
+
+        .prev { left: -60px; border-radius: 3px 0 0 3px; }
+        .next { right: -60px; border-radius: 0 3px 3px 0; }
+        .prev:hover, .next:hover { background-color: var(--accent-red); }
+
+        /* Boutons */
         .btn-group {
             display: flex;
             gap: 10px;
@@ -201,7 +157,6 @@
 
         .btn-cart, .btn-amazon {
             flex: 1;
-            display: block;
             background-color: transparent;
             color: var(--text-main);
             border: 1px solid var(--accent-red);
@@ -233,26 +188,10 @@
             border-bottom: 1px solid #333;
         }
 
-        .cart-total {
-            text-align: right;
-            font-size: 1.5rem;
-            margin-top: 20px;
-            font-weight: bold;
-        }
-
+        .cart-total { text-align: right; font-size: 1.5rem; margin-top: 20px; font-weight: bold; }
         .btn-checkout {
-            display: block;
-            width: 100%;
-            background-color: #28a745;
-            color: white;
-            padding: 20px;
-            text-align: center;
-            text-decoration: none;
-            font-weight: bold;
-            text-transform: uppercase;
-            margin-top: 30px;
-            border: none;
-            cursor: pointer;
+            width: 100%; background-color: #28a745; color: white; padding: 20px;
+            text-transform: uppercase; font-weight: bold; border: none; cursor: pointer; margin-top: 30px;
         }
 
         /* Auteur & Contact */
@@ -298,150 +237,116 @@
             border-radius: 4px;
         }
 
-        footer {
-            background-color: #000;
-            text-align: center;
-            padding: 40px;
-            border-top: 1px solid #222;
-        }
+        footer { background-color: #000; text-align: center; padding: 40px; border-top: 1px solid #222; }
 
         #cart-notification {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #28a745;
-            color: white;
-            padding: 15px 25px;
-            border-radius: 4px;
-            display: none;
-            z-index: 2000;
+            position: fixed; bottom: 20px; right: 20px; background: #28a745;
+            color: white; padding: 15px 25px; border-radius: 4px; display: none; z-index: 2000;
+        }
+
+        /* Responsive flèches */
+        @media (max-width: 600px) {
+            .prev { left: 10px; }
+            .next { right: 10px; }
+            .carousel-container { max-width: 100%; }
         }
     </style>
 </head>
 <body>
-    
 
     <header>
         <div class="logo" onclick="showPage('accueil')">LDR <span>Édition</span></div>
         <nav>
-            <a onclick="showPage('accueil')">Accueil</a>
-            <a onclick="showPage('boutique')">Boutique</a>
-            <a onclick="showPage('auteur')">L'Auteur</a>
+            <a onclick="showPage('accueil')">Home</a>
+            <a onclick="showPage('boutique')">Shop</a>
+            <a onclick="showPage('auteur')">The Author</a>
             <a onclick="showPage('contact')">Contact / Manuscrits</a>
-            <a onclick="showPage('panier-page')">🛒 Panier (<span id="cart-count">0</span>)</a>
+            <a onclick="showPage('panier-page')">🛒 Cart (<span id="cart-count">0</span>)</a>
         </nav>
     </header>
-     <main id="accueil" class="page active">
+
+    <main id="accueil" class="page active">
         <section class="hero">
             <h1>Mon Univers & My Universe</h1>
+            <p>Perseverance in the service of suspense and love.</p>
             <p>La persévérance au service du suspense & de l'amour.</p>
-            <button class="btn-cart" onclick="showPage('boutique')" style="margin: 20px auto; width: 250px;">Voir la boutique</button>
+            <button class="btn-cart" onclick="showPage('boutique')" style="margin: 20px auto; width: 250px;">Shop View</button>
         </section>
     </main>
 
     <main id="boutique" class="page">
-        <h1 class="section-title">Catalogue Complet</h1>
+        <h1 class="section-title">Complete Catalogue</h1>
         
-        <h3 class="section-title" style="border-top: 1px solid #333; padding-top: 40px;">Version Française</h3>
-        <<div class="carousel-container">
-    <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+        <h3 class="section-title" style="border-top: 1px solid #333; padding-top: 40px;">English Version</h3>
+        <div class="carousel-container">
+            <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+            <button class="next" onclick="changeSlide(1)">&#10095;</button>
 
-    <div class="carousel-wrapper">
-        <div class="book-slide">
-            <div class="book-cover">
-                <img src="images/piece.jpg.png" alt="Livre 1">
-            </div>
-            <h3>La Pièce À Conviction</h3>
-            <p class="book-price">26.95 $</p>
-            <a href="LIEN_AMAZON" class="btn-amazon">Voir sur Amazon</a>
-        </div>
-
-        <div class="book-slide" style="display:none;">
-            <div class="book-cover">
-                <img src="images/slience.jpg.png" alt="Livre 2">
-            </div>
-            <h3>Le Silence A Un Prix</h3>
-            <p class="book-price">27.95 $</p>
-            <a href="LIEN_AMAZON" class="btn-amazon">Voir sur Amazon</a>
-        </div>
-    </div>
-
-    <button class="next" onclick="moveSlide(1)">&#10095;</button>
-</div>
-
-       
-                <div class="book-grid">
-                    <div class="book-card"><div class="book-card"><img src="images/silence.jpg.png" alt="Le Silence A Un Prix" style="width: 100%; max-height: 350px; object-fit: contain; display: block; border-radius: 4px;"> 
-                <h3>Le Silence A Un Prix</h3>
-                <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 10px;">L'Affaire Jefferson</p>
-                <p class="book-price">25.95 $</p>
+            <div class="book-slide active">
+                <div class="book-cover">
+                    <img src="images/evidence.jpg.png" alt="The Piece Of Evidence">
+                </div>
+                <h3>The Piece Of Evidence</h3>
+                <p style="color: var(--text-muted); font-size: 0.8rem; margin-bottom: 10px;">The Jefferson Case</p>
+                <p class="book-price">28.95 $</p>
                 <div class="btn-group">
-                    <button class="btn-cart" onclick="addToCart('Le Silence A Un Prix', 25.95)">+ Panier</button>
-                    <a href="https://www.amazon.ca/dp/B0GRQYXVNB" target="_blank" class="btn-amazon">Amazon</a>
+                    <button class="btn-cart" onclick="addToCart('The Piece Of Evidence', 28.95)">+ Panier</button>
+                    <a href="https://www.amazon.ca/dp/B0GTTZD5GV" target="_blank" class="btn-amazon">Amazon</a>
                 </div>
             </div>
 
-            <div class="books-grid">
-            <img src="images/regle.jpg.png" alt="La Règle Non Écrite" style="width: 100%; max-height: 350px; object-fit: contain; display: block; border-radius: 4px;">
-                <h3>La Règle Non Écrite</h3>
-                <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 10px;">L'Affaire Jefferson</p>
-                <p class="book-price">25.95 $</p>
+            <div class="book-slide">
+                <div class="book-cover">
+                    <img src="images/silenceeng.jpg.png" alt="Silence Has A Price">
+                </div>
+                <h3>Silence Has A Price</h3>
+                <p style="color: var(--text-muted); font-size: 0.8rem; margin-bottom: 10px;">The Jefferson Case</p>
+                <p class="book-price">27.95 $</p>
                 <div class="btn-group">
-                    <button class="btn-cart" onclick="addToCart('La Règle Non Écrite', 25.95)">+ Panier</button>
+                    <button class="btn-cart" onclick="addToCart('Silence Has A Price', 27.95)">+ Panier</button>
+                    <a href="https://www.amazon.ca/dp/B0GV32RWSY" target="_blank" class="btn-amazon">Amazon</a>
+                </div>
+            </div>
+
+            <div class="book-slide">
+                <div class="book-cover">
+                    <img src="images/rule.jpg.png" alt="An Unwritten Rule">
+                </div>
+                <h3>An Unwritten Rule</h3>
+                <p style="color: var(--text-muted); font-size: 0.8rem; margin-bottom: 10px;">The Jefferson Case</p>
+                <p class="book-price">28.95 $</p>
+                <div class="btn-group">
+                    <button class="btn-cart" onclick="addToCart('An Unwritten Rule', 28.95)">+ Panier</button>
                     <a href="https://www.amazon.ca" target="_blank" class="btn-amazon">Amazon</a>
                 </div>
             </div>
-
-            <div class="book-grid">
-                <div class="book-card"><div class="book-card"><img src="images/multi.jpg.png" alt="La Règle Non Écrite" style="width: 100%; max-height: 350px; object-fit: contain; display: block; border-radius: 4px;">
-                <h3>Une Vie En Mode Multijoueur</h3>
-                <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 10px;">Elle avait tout sous contrôle... Jusqu'à lui</p>
-                <p class="book-price">17.95 $</p>
+            
+            <div class="book-slide">
+                <div class="book-cover">
+                    <img src="images/multiplayer.jpg.png" alt="Multiplayer Mode">
+                </div>
+                <h3>A Life On A Multiplayer Mode</h3>
+                <p style="color: var(--text-muted); font-size: 0.8rem; margin-bottom: 10px;">She Used To Control... Until Him</p>
+                <p class="book-price">18.95 $</p>
                 <div class="btn-group">
-                    <button class="btn-cart" onclick="addToCart('Une Vie En Mode Multijoueur', 24.95)">+ Panier</button>
-                    <a href="https://www.amazon.ca/dp/B0GV8C89MF" target="_blank" class="btn-amazon">Amazon</a>
+                    <button class="btn-cart" onclick="addToCart('A Life On A Multiplayer Mode', 18.95)">+ Panier</button>
+                    <a href="https://www.amazon.ca" target="_blank" class="btn-amazon">Amazon</a>
                 </div>
             </div>
         </div>
     </main>
 
     <main id="panier-page" class="page">
-        <h2 class="section-title">Votre Panier / Your Cart</h2>
+        <h2 class="section-title">Your Cart</h2>
         <div class="cart-container">
-            <div id="cart-items-list">
-                <p style="text-align:center;">Votre panier est vide.</p>
-            </div>
+            <div id="cart-items-list"><p style="text-align:center;">Your Cart Is Empty.</p></div>
             <div class="cart-total">Total: <span id="cart-total-price">0.00</span> $</div>
-            <button class="btn-checkout" onclick="alert('Redirection vers la plateforme de paiement sécurisée...')">Procéder au paiement</button>
-        </div>
-    </main>
-
-
-    <main id="panier-page" class="page">
-        <h2 class="section-title">Votre Panier / Your Cart</h2>
-        <div class="cart-container">
-            <div id="cart-items-list">
-                <p style="text-align:center;">Votre panier est vide.</p>
-            </div>
-            <div class="cart-total">Total: <span id="cart-total-price">0.00</span> $</div>
-            <button class="btn-checkout" onclick="alert('Redirection vers la plateforme de paiement sécurisée...')">Procéder au paiement</button>
+            <button class="btn-checkout" onclick="alert('Redirection vers la plateforme de paiement sécurisée...')">Proceed to payment</button>
         </div>
     </main>
 
     <main id="auteur" class="page">
-        <h2 class="section-title">Charles Lane D. Roches</h2>
-        <div class="content-body">
-            <p>Derrière chaque grand thriller se cache une vérité souvent plus simple, mais plus puissante : celle de la détermination. Pour moi, <strong>Charles Lane D. Roches</strong>, l'écriture n'est pas seulement une passion, c'est le résultat d'un parcours bâti sur la persévérance.</p>
-            <p>Inspiré par des figures de ténacité comme Martin St-Louis, j'ai choisi de tracer mon propre chemin dans l'univers de l'édition. Diplômé d'un AEC et animé par une volonté de fer, j'ai fondé <strong>LDR édition</strong> pour offrir aux lecteurs des histoires qui ne font aucun compromis. De la création de la maison à l'écriture de mes thrillers, chaque étape a été franchie avec détermination. Mon parcours indépendant est le reflet d'une volonté de fer de partager des histoires authentiquement québécoises avec vous.</p>
-            
-            <h3>Un univers sombre et authentique</h3>
-            <p>Spécialisé dans le thriller psychologique, le suspense et la romance sombre (dark romance) ou la simple romance, mon travail explore les recoins les plus profonds de l'âme humaine. Que ce soit à travers les secrets de la <strong>Trilogie L'Affaire Jefferson</strong> ou les méandres de l'esprit de personnages comme Jeff, Zoé, Mike Thériault & Vanessa, mon objectif est simple : vous tenir captif jusqu'à la dernière ligne.</p>
-
-            <h3>La signature québécoise</h3>
-            <p>En tant qu'auteur indépendant, je mets un point d'honneur à préserver l'authenticité de notre culture. Mes récits sont ancrés dans une réalité purement québécoise, avec une langue et des expressions qui nous ressemblent. Pas de fioritures inutiles, juste le rythme nerveux et l'intensité d'un suspense qui respire le vrai.</p>
-        </div>
-
-        <h2 class="section-title" style="border-top: 1px solid #333; padding-top: 40px;">English Bio</h2>
+        <h2 class="section-title" style="border-top: 1px solid #333; padding-top: 40px;">Charles Lane D.Roches</h2>
         <div class="content-body">
             <p>Behind every great thriller lies a truth that is often simpler, yet more powerful: determination. For me, <strong>Charles Lane D. Roches</strong>, writing is not just a passion; it is the result of a journey built on perseverance.</p>
             <p>Inspired by figures of tenacity like Martin St-Louis, I chose to carve my own path in the publishing world. Armed with an AEC diploma and an iron will, I founded <strong>LDR édition</strong> to offer readers stories that make no compromises. My independent journey reflects a steadfast commitment to sharing authentically Quebec stories with you.</p>
@@ -455,24 +360,24 @@
     </main>
 
     <main id="contact" class="page">
-        <h2 class="section-title">Soumission de manuscrit / Manuscript Submission</h2>
+        <h2 class="section-title">Manuscript Submission</h2>
         <div class="contact-container">
             <div class="step-box">
-                <span class="step-title">Étape 1 : Objet du courriel / Step 1 : Email Subject</span>
-                <p>NOM DU TITRE - CATÉGORIE / TITLE NAME - CATEGORY</p>
+                <span class="step-title">Step 1 : Email Subject</span>
+                <p>TITLE NAME - CATEGORY</p>
             </div>
             <div class="step-box">
-                <span class="step-title">Étape 2 : Joindre votre manuscrit / Step 2 : Attach your manuscript</span>
-                <p>Format <strong>Word</strong> uniquement avec synopsis / Format <strong>Word</strong> only, with synopsis included.</p>
+                <span class="step-title">Step 2 : Attach your manuscript</span>
+                <p>Format <strong>Word</strong> only, with synopsis included.</p>
             </div>
             <div class="step-box">
-                <span class="step-title">Étape 3 : Soumettre / Submit</span>
+                <span class="step-title">Step 3 : Submit</span>
                 <a href="mailto:c.lanedesroches@gmail.com" class="email-link">c.lanedesroches@gmail.com</a>
             </div>
         </div>
     </main>
 
-    <div id="cart-notification">Produit ajouté !</div>
+    <div id="cart-notification">Item Added !</div>
 
     <footer>
         <p>&copy; 2026 LDR Édition - Charles Lane D. Roches</p>
@@ -480,6 +385,7 @@
 
     <script>
         let cart = [];
+        let currentSlideIndex = 0;
 
         function showPage(pageId) {
             const pages = document.querySelectorAll('.page');
@@ -489,10 +395,17 @@
             if(pageId === 'panier-page') updateCartDisplay();
         }
 
+        // Système de Carrousel
+        function changeSlide(n) {
+            const slides = document.querySelectorAll(".book-slide");
+            slides[currentSlideIndex].classList.remove("active");
+            currentSlideIndex = (currentSlideIndex + n + slides.length) % slides.length;
+            slides[currentSlideIndex].classList.add("active");
+        }
+
         function addToCart(bookName, price) {
             cart.push({name: bookName, price: price});
             document.getElementById('cart-count').innerText = cart.length;
-            
             const note = document.getElementById('cart-notification');
             note.innerText = bookName + " ajouté !";
             note.style.display = 'block';
@@ -502,40 +415,19 @@
         function updateCartDisplay() {
             const list = document.getElementById('cart-items-list');
             const totalDisplay = document.getElementById('cart-total-price');
-            
             if (cart.length === 0) {
-                list.innerHTML = '<p style="text-align:center;">Votre panier est vide.</p>';
+                list.innerHTML = '<p style="text-align:center;">The Cart Is Empty.</p>';
                 totalDisplay.innerText = "0.00";
                 return;
             }
-
             list.innerHTML = '';
             let currentTotal = 0;
-            
             cart.forEach((item) => {
                 currentTotal += item.price;
-                list.innerHTML += `
-                    <div class="cart-item">
-                        <span>${item.name}</span>
-                        <span>${item.price.toFixed(2)} $</span>
-                    </div>
-                `;
+                list.innerHTML += `<div class="cart-item"><span>${item.name}</span><span>${item.price.toFixed(2)} $</span></div>`;
             });
-            
             totalDisplay.innerText = currentTotal.toFixed(2);
         }
-        <script>
-    let currentSlide = 0;
-    const slides = document.querySelectorAll(".book-slide");
-
-    function moveSlide(step) {
-        slides[currentSlide].style.display = "none"; // Cache le livre actuel
-        currentSlide = (currentSlide + step + slides.length) % slides.length;
-        slides[currentSlide].style.display = "block"; // Affiche le nouveau
-    }
-</script>
     </script>
 </body>
 </html>
-
-
