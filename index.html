@@ -22,7 +22,71 @@
             padding: 0;
             line-height: 1.6;
         }
+.carousel-section {
+    width: 100%;
+    padding: 50px 0;
+    background: #1a1a1a; /* Fond sombre élégant */
+    color: #fff;
+}
 
+.carousel-container {
+    position: relative;
+    max-width: 800px;
+    margin: auto;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.carousel-slide {
+    display: none;
+    padding: 60px;
+    text-align: center;
+    transition: opacity 0.5s ease;
+}
+
+.carousel-slide.active {
+    display: block;
+}
+
+.carousel-content h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #f39c12; /* Une touche dorée pour les titres */
+}
+
+.carousel-content p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.btn-read {
+    padding: 10px 25px;
+    background: #f39c12;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+/* Boutons */
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.1);
+    color: white;
+    border: none;
+    padding: 15px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background 0.3s;
+}
+
+.prev:hover, .next:hover { background: rgba(255,255,255,0.3); }
+.prev { left: 0; }
+.next { right: 0; }
         header {
             background-color: #000000;
             padding: 20px 50px;
@@ -194,7 +258,29 @@
     </style>
 </head>
 <body>
+<section class="carousel-section">
+  <div class="carousel-container">
+    <div class="carousel-slide active">
+      <div class="carousel-content">
+        <h2>Titre du Livre 1</h2>
+        <p>Votre résumé captivant ici. Plongez le lecteur dans l'ambiance dès les premières lignes.</p>
+        <a href="#" class="btn-read">En savoir plus</a>
+      </div>
+    </div>
 
+    <div class="carousel-slide">
+      <div class="carousel-content">
+        <h2>Titre du Livre 2</h2>
+        <p>Un autre résumé pour un autre univers. Idéal pour présenter votre trilogie ou vos nouveautés.</p>
+        <a href="#" class="btn-read">En savoir plus</a>
+      </div>
+    </div>
+
+    <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+    <button class="next" onclick="changeSlide(1)">&#10095;</button>
+  </div>
+</section>
+    
     <header>
         <div class="logo" onclick="showPage('accueil')">LDR <span>Édition</span></div>
         <nav>
@@ -433,6 +519,17 @@
             });
             totalDisplay.innerText = currentTotal.toFixed(2);
         }
+        let currentSlide = 0;
+const slides = document.querySelectorAll('.carousel-slide');
+
+function changeSlide(direction) {
+    slides[currentSlide].classList.remove('active');
+    currentSlide = (currentSlide + direction + slides.length) % slides.length;
+    slides[currentSlide].classList.add('active');
+}
+
+// Optionnel : Défilement automatique toutes les 5 secondes
+setInterval(() => changeSlide(1), 5000);
     </script>
 </body>
 </html>
