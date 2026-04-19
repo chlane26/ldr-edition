@@ -249,27 +249,38 @@
         #cart-notification { position: fixed; bottom: 20px; right: 20px; background: #28a745; color: white; padding: 15px 25px; border-radius: 4px; display: none; z-index: 2000; }
 
         @media (max-width: 600px) {
-            .prev { left: 5px; }
-            .next { right: 5px; }
-            header { padding: 10px 20px; flex-direction: column; }
-             { margin-top: 15px; }
-             a { margin-left: 10px; margin-right: 10px; }
-        }
+    header { 
+        padding: 15px; 
+        flex-direction: column; 
+    }
+    nav { 
+        margin-top: 15px; 
+        display: flex; 
+        flex-wrap: wrap; 
+        justify-content: center; 
+        gap: 15px; /* Cela crée un espacement propre entre les boutons */
+    }
+    nav a { 
+        margin-left: 0; 
+        margin-right: 0; 
+    }
+}
     </style>
 </head>
 <body>
 
     
+ 
     <header>
-        <div class="logo" onclick="showPage('accueil')">LDR <span>Édition</span></div>
-        <>
-            <a onclick="showPage('accueil')">Acceuil</a>
-            <a onclick="showPage('boutique')">Shop</a>
-            <a onclick="showPage('auteur')">L'Auteur</a>
-            <a onclick="showPage('contact')">Contact</a>
-            <a onclick="showPage('panier-page')">🛒 Panier (<span id="cart-count">0</span>)</a>
-        </nav>
-    </header>
+    <div class="logo" style="cursor: pointer;" onclick="showPage('accueil')">LDR <span>Édition</span></div>
+    <nav>
+        <a href="#" onclick="showPage('accueil'); return false;">Accueil</a>
+        <a href="#" onclick="showPage('boutique'); return false;">Boutique</a>
+        <a href="#" onclick="showPage('auteur'); return false;">L'Auteur</a>
+        <a href="#" onclick="showPage('contact'); return false;">Contact</a>
+        <a href="#" onclick="showPage('panier-page'); return false;">🛒 Panier (<span id="cart-count">0</span>)</a>
+    </nav>
+</header>
 
     <main id="accueil" class="page active">
         <section class="hero">
