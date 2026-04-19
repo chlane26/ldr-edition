@@ -37,7 +37,26 @@
     border-radius: 8px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
+.lang-switch {
+    display: inline-block;
+    margin-left: 20px;
+}
 
+#lang-btn {
+    background: transparent;
+    border: 1px solid #f39c12;
+    color: #f39c12;
+    padding: 5px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+#lang-btn:hover {
+    background: #f39c12;
+    color: #fff;
+}
 .carousel-slide {
     display: none;
     padding: 60px;
@@ -252,8 +271,8 @@
             .prev { left: 5px; }
             .next { right: 5px; }
             header { padding: 10px 20px; flex-direction: column; }
-            nav { margin-top: 15px; }
-            nav a { margin-left: 10px; margin-right: 10px; }
+             { margin-top: 15px; }
+             a { margin-left: 10px; margin-right: 10px; }
         }
     </style>
 </head>
@@ -262,12 +281,13 @@
     
     <header>
         <div class="logo" onclick="showPage('accueil')">LDR <span>Édition</span></div>
-        <nav>
-            <a onclick="showPage('accueil')">Home</a>
+        <>
+            <a onclick="showPage('accueil')">Acceuil</a>
             <a onclick="showPage('boutique')">Shop</a>
-            <a onclick="showPage('auteur')">The Author</a>
+            <a onclick="showPage('auteur')">L'Auteur</a>
+            <a onclick="showPage('resume')">Résumé</a>
             <a onclick="showPage('contact')">Contact</a>
-            <a onclick="showPage('panier-page')">🛒 Cart (<span id="cart-count">0</span>)</a>
+            <a onclick="showPage('panier-page')">🛒 Panier (<span id="cart-count">0</span>)</a>
         </nav>
     </header>
 
@@ -394,6 +414,26 @@
 
         </div>
     </main>
+    <section class="carousel-section">
+  <div class="carousel-container">
+    
+    <div class="carousel-slide active">
+      <div class="carousel-content">
+        <h2 class="lang-fr">Titre du Livre 1</h2>
+        <p class="lang-fr">Votre résumé en français ici.</p>
+        <a href="#" class="btn-read lang-fr">En savoir plus</a>
+
+        <h2 class="lang-en" style="display:none;">Book Title 1</h2>
+        <p class="lang-en" style="display:none;">Your summary in English here.</p>
+        <a href="#" class="btn-read lang-en" style="display:none;">Read More</a>
+      </div>
+    </div>
+
+    <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+    <button class="next" onclick="changeSlide(1)">&#10095;</button>
+  </div>
+</section>
+    // ajout voir
 <section class="carousel-section">
   <div class="carousel-container">
     <div class="carousel-slide active">
@@ -519,6 +559,25 @@
             });
             totalDisplay.innerText = currentTotal.toFixed(2);
         }
+        let currentLang = 'fr';
+
+function toggleLanguage() {
+    const frElements = document.querySelectorAll('.lang-fr');
+    const enElements = document.querySelectorAll('.lang-en');
+    const btn = document.getElementById('lang-btn');
+
+    if (currentLang === 'fr') {
+        frElements.forEach(el => el.style.display = 'none');
+        enElements.forEach(el => el.style.display = 'block');
+        btn.innerText = 'FR';
+        currentLang = 'en';
+    } else {
+        frElements.forEach(el => el.style.display = 'block');
+        enElements.forEach(el => el.style.display = 'none');
+        btn.innerText = 'EN';
+        currentLang = 'fr';
+    }
+}
         let currentSlide = 0;
 const slides = document.querySelectorAll('.carousel-slide');
 
