@@ -37,26 +37,7 @@
     border-radius: 8px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
-.lang-switch {
-    display: inline-block;
-    margin-left: 20px;
-}
 
-#lang-btn {
-    background: transparent;
-    border: 1px solid #f39c12;
-    color: #f39c12;
-    padding: 5px 12px;
-    cursor: pointer;
-    border-radius: 4px;
-    font-weight: bold;
-    transition: all 0.3s ease;
-}
-
-#lang-btn:hover {
-    background: #f39c12;
-    color: #fff;
-}
 .carousel-slide {
     display: none;
     padding: 60px;
@@ -559,25 +540,7 @@
             });
             totalDisplay.innerText = currentTotal.toFixed(2);
         }
-        let currentLang = 'fr';
-
-function toggleLanguage() {
-    const frElements = document.querySelectorAll('.lang-fr');
-    const enElements = document.querySelectorAll('.lang-en');
-    const btn = document.getElementById('lang-btn');
-
-    if (currentLang === 'fr') {
-        frElements.forEach(el => el.style.display = 'none');
-        enElements.forEach(el => el.style.display = 'block');
-        btn.innerText = 'FR';
-        currentLang = 'en';
-    } else {
-        frElements.forEach(el => el.style.display = 'block');
-        enElements.forEach(el => el.style.display = 'none');
-        btn.innerText = 'EN';
-        currentLang = 'fr';
-    }
-}
+        
         let currentSlide = 0;
 const slides = document.querySelectorAll('.carousel-slide');
 
