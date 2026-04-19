@@ -513,16 +513,7 @@
             totalDisplay.innerText = currentTotal.toFixed(2);
         }
         
-        let currentSlide = 0;
-const slides = document.querySelectorAll('.carousel-slide');
-
-function changeSlide(direction) {
-    slides[currentSlide].classList.remove('active');
-    currentSlide = (currentSlide + direction + slides.length) % slides.length;
-    slides[currentSlide].classList.add('active');
-}
-
-// Optionnel : Défilement automatique toutes les 5 secondes
+      
 setInterval(() => changeSlide(1), 5000);
     </script>
 </body>
