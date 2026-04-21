@@ -457,7 +457,7 @@ A tender, sensual, and witty novel about the bonds that shape us, the desires we
         <p>&copy; 2026 LDR Édition - Charles Lane D. Roches</p>
     </footer>
 
-    <script>
+      <script>
         let cart = [];
         let currentSlideIndex = 0;
         let currentSummaryIndex = 0;
@@ -483,31 +483,55 @@ A tender, sensual, and witty novel about the bonds that shape us, the desires we
             slides[currentSummaryIndex].classList.add("active");
         }
 
-        function addToCart(bookName, price) {
-            cart.push({name: bookName, price: price});
-            document.getElementById('cart-count').innerText = cart.length;
-            const note = document.getElementById('cart-notification');
-            note.innerText = bookName + " ajouté !";
-            note.style.display = 'block';
-            setTimeout(() => note.style.display = 'none', 2000);
-        }
+function addToCart(bookName, price) {
+    const tps = price * 0.05;
+    const tvq = price * 0.09975;
+    const priceWithTax = price + tps + tvq;
 
-        function updateCartDisplay() {
-            const list = document.getElementById('cart-items-list');
-            const totalDisplay = document.getElementById('cart-total-price');
-            if (cart.length === 0) {
-                list.innerHTML = '<p style="text-align:center;">Votre Panier Est Vide.</p>';
-                totalDisplay.innerText = "0.00";
-                return;
-            }
-            list.innerHTML = '';
-            let currentTotal = 0;
-            cart.forEach((item) => {
-                currentTotal += item.price;
-                list.innerHTML += `<div class="cart-item"><span>${item.name}</span><span>${item.price.toFixed(2)} $</span></div>`;
-            });
-            totalDisplay.innerText = currentTotal.toFixed(2);
-        }
+    cart.push({
+        name: bookName, 
+        basePrice: price,
+        totalItemPrice: priceWithTax 
+    });
+
+    document.getElementById('cart-count').innerText = cart.length;
+    
+    const note = document.getElementById('cart-notification');
+    note.innerText = bookName + " ajouté !";
+    note.style.display = 'block';
+    setTimeout(() => note.style.display = 'none', 2000);
+}
+function removeFromCart(index) {
+    cart.splice(index, 1); // Retire l'élément à l'index donné
+    document.getElementById('cart-count').innerText = cart.length;
+    updateCartDisplay(); // Relance l'affichage et le calcul du total
+}function updateCartDisplay() {
+    const list = document.getElementById('cart-items-list');
+    const totalDisplay = document.getElementById('cart-total-price');
+    
+    if (cart.length === 0) {
+        list.innerHTML = '<p style="text-align:center;">Votre Panier Est Vide.</p>';
+        totalDisplay.innerText = "0.00";
+        return;
+    }
+
+    list.innerHTML = '';
+    let currentTotal = 0;
+
+    cart.forEach((item, index) => {
+        currentTotal += item.totalItemPrice;
+        list.innerHTML += `
+            <div class="cart-item">
+                <span>${item.name} (Taxes incl.)</span>
+                <span>
+                    ${item.totalItemPrice.toFixed(2)} $ 
+                    <button onclick="removeFromCart(${index})" style="margin-left:10px; background:none; border:none; color:red; cursor:pointer;">[X]</button>
+                </span>
+            </div>`;
+    });
+
+    totalDisplay.innerText = currentTotal.toFixed(2);
+}
     </script>
 </body>
 </html>
