@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-CA">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -62,10 +62,13 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             cursor: pointer;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
         }
 
-        nav a:hover { color: var(--accent-red); }
+        nav a:hover { 
+            color: var(--accent-red); 
+            transform: scale(1.05); 
+        }
 
         /* --- PAGE MANAGEMENT --- */
         .page { display: none; padding-top: 20px; }
@@ -84,6 +87,50 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             color: #fff;
+        }
+
+        /* --- REVIEW SYSTEM --- */
+        .rating { direction: rtl; display: inline-block; font-size: 25px; }
+        .rating input { display: none; }
+        .rating label { color: #444; cursor: pointer; transition: 0.2s; padding: 0 2px; }
+        .rating label:hover, .rating label:hover ~ label, .rating input:checked ~ label { color: #ffcc00; }
+        
+        .comment-box { 
+            background: rgba(255,255,255,0.05); 
+            padding: 20px; 
+            margin: 15px auto; 
+            border-left: 4px solid var(--accent-red); 
+            position: relative; 
+            border-radius: 4px;
+            text-align: left;
+            max-width: 800px;
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .comment-book-img { width: 70px; height: auto; border-radius: 4px; border: 1px solid #333; }
+        .comment-content { flex: 1; }
+
+        .delete-btn { 
+            position: absolute; 
+            top: 15px; 
+            right: 15px; 
+            background: rgba(139, 0, 0, 0.4); 
+            color: white; 
+            border: none; 
+            cursor: pointer; 
+            border-radius: 4px; 
+            padding: 3px 8px; 
+            font-size: 0.7rem;
+            transition: background 0.3s ease;
+        }
+        .delete-btn:hover { background: var(--accent-red); }
+
+        .input-avis {
+            width: 100%; padding: 10px; background: #121212; color: #fff; 
+            border: 1px solid #333; border-radius: 4px; margin-bottom: 10px;
+            font-family: inherit; box-sizing: border-box;
         }
 
         /* --- SHOP CAROUSEL --- */
@@ -117,7 +164,7 @@
 
         .book-cover img { max-width: 100%; max-height: 100%; object-fit: contain; }
 
-        /* --- SUMMARIES CAROUSEL (Wide) --- */
+        /* --- PLOTS CAROUSEL (Wide) --- */
         .summary-container {
             position: relative;
             max-width: 900px;
@@ -145,81 +192,138 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Nav Buttons */
+        /* Navigation Buttons */
         .prev, .next {
             cursor: pointer; position: absolute; top: 50%; transform: translateY(-50%);
             width: auto; padding: 16px; color: white; font-weight: bold; font-size: 24px;
             background-color: rgba(0,0,0,0.8); border: none; border-radius: 5px; z-index: 100;
-            transition: 0.3s;
+            transition: all 0.3s ease;
         }
 
         .prev { left: -60px; }
         .next { right: -60px; }
-        .prev:hover, .next:hover { background-color: var(--accent-red); }
+        .prev:hover, .next:hover { background-color: var(--accent-red); scale: 1.1; }
 
-        /* Buy Buttons */
+        /* Action Buttons */
         .btn-group { display: flex; gap: 10px; margin-top: 15px; }
         
         .btn-cart, .btn-amazon {
             flex: 1; background-color: transparent; color: var(--text-main);
             border: 1px solid var(--accent-red); padding: 12px 5px;
             text-decoration: none; text-transform: uppercase; font-size: 0.8rem;
-            font-weight: bold; cursor: pointer; transition: 0.3s; text-align: center;
+            font-weight: bold; cursor: pointer; text-align: center;
+            transition: all 0.3s ease;
+            border-radius: 4px;
         }
         
-        .btn-cart:hover { background-color: var(--accent-red); }
+        .btn-cart:hover { 
+            background-color: var(--accent-red); 
+            transform: translateY(-3px); 
+            box-shadow: 0 4px 10px rgba(139, 0, 0, 0.4); 
+        }
         .btn-amazon { border-color: #ff9900; color: #ff9900; }
-        .btn-amazon:hover { background-color: #ff9900; color: #000; }
+        .btn-amazon:hover { 
+            background-color: #ff9900; 
+            color: #000; 
+            transform: translateY(-3px); 
+        }
 
         /* --- CART --- */
         .cart-container { max-width: 800px; margin: 0 auto 80px; padding: 40px; background-color: var(--surface-color); }
         .cart-item { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #333; }
         .cart-total { text-align: right; font-size: 1.5rem; margin-top: 20px; font-weight: bold; }
-        .btn-checkout { width: 100%; background-color: #28a745; color: white; padding: 20px; text-transform: uppercase; font-weight: bold; border: none; cursor: pointer; margin-top: 30px; }
+        .btn-checkout { width: 100%; background-color: #28a745; color: white; padding: 20px; text-transform: uppercase; font-weight: bold; border: none; cursor: pointer; margin-top: 30px; transition: 0.3s; }
+        .btn-checkout:hover { background-color: #218838; }
 
         /* --- AUTHOR & CONTACT --- */
         .content-body { max-width: 800px; margin: 0 auto; padding: 0 20px 60px; text-align: left; }
         .contact-container { max-width: 800px; margin: 0 auto 80px; padding: 40px; background-color: var(--surface-color); border-left: 4px solid var(--accent-red); }
         .step-box { margin-bottom: 30px; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 4px; }
         .step-title { color: var(--accent-red); font-weight: bold; text-transform: uppercase; display: block; margin-bottom: 10px; }
-        .email-link { display: inline-block; margin-top: 10px; background: var(--accent-red); color: white; padding: 15px 30px; text-decoration: none; font-weight: bold; border-radius: 4px; }
+        .email-link { display: inline-block; margin-top: 10px; background: var(--accent-red); color: white; padding: 15px 30px; text-decoration: none; font-weight: bold; border-radius: 4px; transition: 0.3s;}
+        .email-link:hover { transform: translateY(-3px); box-shadow: 0 4px 10px rgba(139, 0, 0, 0.4); }
 
         footer { background-color: #000; text-align: center; padding: 40px; border-top: 1px solid #222; }
         #cart-notification { position: fixed; bottom: 20px; right: 20px; background: #28a745; color: white; padding: 15px 25px; border-radius: 4px; display: none; z-index: 2000; }
 
         @media (max-width: 768px) {
-            header { flex-direction: column; }
+            header { flex-direction: column; padding: 15px; }
             nav { margin-top: 15px; }
             .summary-slide.active { flex-direction: column; text-align: center; }
             .prev { left: 0; } .next { right: 0; }
+            .comment-box { flex-direction: column; }
         }
     </style>
+
+    <link rel="icon" type="image/jpeg" href="favicon/favicon.jpg">
+    <link rel="apple-touch-icon" href="favicon/favicon.jpg">
+    <meta property="og:image" content="favicon/favicon.jpg">
 </head>
 <body>
 
     <header>
         <div class="logo" onclick="showPage('accueil')">LDR <span>Edition</span></div>
         <nav>
-    <a href="#" onclick="showPage('accueil'); return false;">Home</a>
-    <a href="#" onclick="showPage('boutique'); return false;">Shop</a>
-    <a href="#" onclick="showPage('resumes'); return false;">Summaries</a>
-    <a href="#" onclick="showPage('auteur'); return false;">The Author</a>
-    <a href="#" onclick="showPage('contact'); return false;">Contact</a>
-    <a href="#" onclick="showPage('panier-page'); return false;">🛒 Cart (<span id="cart-count">0</span>)</a>
-    
-    <a href="index.html" style="color: var(--accent-red); font-weight: bold;">EN / FR</a>
-</nav>
+            <a href="#" onclick="showPage('accueil'); return false;">Home</a>
+            <a href="#" onclick="showPage('boutique'); return false;">Shop</a>
+            <a href="#" onclick="showPage('resumes'); return false;">Plots</a>
+            <a href="#" onclick="showPage('auteur'); return false;">The Author</a>
+            <a href="#" onclick="showPage('contact'); return false;">Contact</a>
+            <a href="#" onclick="showPage('panier-page'); return false;">🛒 Cart (<span id="cart-count">0</span>)</a>
+            <a href="index.html" style="color: var(--accent-red); font-weight: bold;">FR / EN</a>
+        </nav>
     </header>
 
     <main id="accueil" class="page active">
         <section class="hero">
             <h1>My Universe & Mon Univers</h1>
-            <h2 style="color: var(--accent-red); margin-top: 30px;"><p>Perseverance At The Service Of Suspense & Love.</h2>
-            <button class="btn-cart" onclick="showPage('boutique')" style="margin: 30px auto; width: 250px; display: block; padding: 15px;">Enter the Shop</button>
-            <button class="btn-cart" onclick="showPage('resumes')" style="margin: 30px auto; width: 250px; display: block; padding: 15px;">Enter The Storylines</button>
+            <h2 style="color: var(--accent-red); margin-top: 30px;">Perseverance in the Service of Suspense & Love.</h2>
             
+            <div style="max-width: 450px; margin: 30px auto; padding: 15px; background-color: var(--surface-color); border-radius: 8px; border: 1px solid #333;">
+                <h4 style="color: var(--accent-red); margin-top: 0; text-transform: uppercase; font-size: 0.9rem;">Exclusives & New Releases</h4>
+                <form action="https://formspree.io/f/VOTRE_ID" method="POST" style="display: flex; gap: 5px;">
+                    <input type="email" name="email" placeholder="Your email" required style="flex: 2; padding: 8px; background: #121212; border: 1px solid #444; color: #fff; border-radius: 4px;">
+                    <button type="submit" class="btn-cart" style="flex: 1; padding: 8px; font-size: 0.7rem;">Subscribe</button>
+                </form>
+            </div>
+
+            <div style="max-width: 550px; margin: 30px auto; padding: 25px; background-color: var(--surface-color); border-radius: 8px; border-left: 4px solid var(--accent-red);">
+                <h3 style="margin-top: 0;">Leave a review of my books</h3>
+                
+                <input type="text" id="reviewer-name" class="input-avis" placeholder="Your name or nickname">
+                
+                <select id="book-select" class="input-avis">
+                    <option value="">-- Choose the book --</option>
+                    <option value="images/evidence.jpg.png">The Piece Of Evidence</option>
+                    <option value="images/silenceeng.jpg.png">Silence Has A Price</option>
+                    <option value="images/rule.jpg.png">An Unwritten Rule</option>
+                    <option value="images/player.jpg.png">A Life In Multiplayer Mode</option>
+                    <option value="images/piece.jpg.png">La Pièce À Conviction</option>
+                    <option value="images/silence.jpg.png">Le Silence A Un Prix</option>
+                    <option value="images/regle.jpg.png">Une Règle Non Écrite</option>
+                    <option value="images/multip.jpg.jpg">Une Vie En Mode Multijoueur</option>
+                </select>
+
+                <div class="rating">
+                    <input type="radio" id="star5" name="rating" value="5"><label for="star5">★</label>
+                    <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>
+                    <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>
+                    <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>
+                    <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>
+                </div>
+                
+                <textarea id="comment-text" rows="2" class="input-avis" placeholder="What did you think?"></textarea>
+                <button onclick="addComment()" class="btn-cart" style="width: 100%;">Publish my review</button>
+            </div>
+
+            <button class="btn-cart" onclick="showPage('boutique')" style="margin: 30px auto; width: 250px; display: block; padding: 15px;">
+                Enter the Shop
+            </button>
+            <button class="btn-cart" onclick="showPage('resumes')" style="margin: 30px auto; width: 250px; display: block; padding: 15px;">
+                Enter the Plot
+            </button>
             <div style="text-align: center; margin-top: 50px;">
-                <img src="images/logo2.jpg" alt="LDR Edition Logo" style="max-width: 180px; height: auto; opacity: 0.9; border-radius: 8px;">
+                <img src="images/Logo.jpg.jpeg" alt="LDR Edition Logo" style="max-width: 180px; height: auto; opacity: 0.9; border-radius: 8px;">
             </div>
         </section>
     </main>
@@ -257,7 +361,7 @@ Because in this case, silence has a price. And someone will have to pay.</p>
             </div>            
             <div class="summary-slide">
                 <div class="summary-image">
-                    <img src="images/rulle.jpg.png" alt="An Unwritten Rule">
+                    <img src="images/rule.jpg.png" alt="An Unwritten Rule">
                 </div>
                 <div class="summary-text">
                     <h2>An Unwritten Rule</h2>
@@ -281,6 +385,7 @@ Amidst laughter, moments of tension, and shared flashes of passion, Emily learns
 A tender, sensual, and witty novel about the bonds that shape us, the desires we finally dare to listen to, and the magic of a love that blooms where you least expect it.</p>
                 </div>
             </div>
+
             <div class="summary-slide">
                 <div class="summary-image"><img src="images/piece.jpg.png" alt="La Pièce À Conviction"></div>
                 <div class="summary-text">
@@ -303,9 +408,9 @@ Dans un monde où chacun protège sa version des faits, le vrai danger n’est p
 Parce que dans cette affaire, le silence a un prix. Et quelqu’un devra le payer.</p>
                 </div>
             </div>
-                        <div class="summary-slide">
+            <div class="summary-slide">
                 <div class="summary-image">
-                    <img src="images/Reggle.jpg.png" alt="Une Règle Non Écrite">
+                    <img src="images/regle.jpg.png" alt="Une Règle Non Écrite">
                 </div>
                 <div class="summary-text">
                     <h2>Une Règle Non Écrite</h2>
@@ -316,9 +421,8 @@ Le passé insiste. Le présent se dérègle.
 Et certaines expériences ne disparaissent jamais vraiment… elles attendent.Dans ce nouveau volet, la tension monte d’un cran. Les liens sont mis à rude épreuve, les vérités se déforment, et une question obsède :
 peut-on vraiment échapper à ce qui nous a marqués au plus profond ?Un tome sombre et troublant, où le non-dit est parfois plus dangereux que la révélation.</p>
                 </div>
-            </div>            
-        
-                <div class="summary-slide">
+            </div>
+            <div class="summary-slide">
                 <div class="summary-image">
                     <img src="images/multip.jpg.jpg" alt="Une Vie En Mode Multijoueur">
                 </div>
@@ -326,14 +430,20 @@ peut-on vraiment échapper à ce qui nous a marqués au plus profond ?Un tome so
                     <h2>Une Vie En Mode Multijoueur</h2>
                     <p><strong>Elle Avait Le Contrôle... Jusqu'à lui</strong></p>
                     <p>Émilie a toujours suivi son instinct… parfois avec logique, souvent avec passion. Elle rit fort, aime encore plus fort et ne recule devant rien quand il s’agit de ressentir, de séduire ou de se laisser emporter. Mais sous son audace, il y a aussi une femme qui cherche à comprendre ce qu’elle veut vraiment.
-Carl est son meilleur ami, son confident, son repère. Patient, attentif et toujours là quand elle en a besoin, il connaît ses forces, ses failles… et ses envies les plus secrètes. Ensemble, ils naviguent entre flirt, complicité et désirs inavoués, découvrant que l’amitié peut se transformer en quelque chose de beaucoup plus intense.
+Carl est son meilleur ami, son confident, son repère. Patient, attentive et toujours là quand elle en a besoin, il connaît ses forces, ses failles… et ses envies les plus secrètes. Ensemble, ils naviguent entre flirt, complicité et désirs inavoués, découvrant que l’amitié peut se transformer en quelque chose de beaucoup plus intense.
 Entre rires, moments de tension, et instants de passion partagée, Émilie apprend à explorer sa sexualité, à s’assumer pleinement et à comprendre ce que signifie aimer… et être aimée.
 Un roman tendre, sensuel et drôle, sur les liens qui nous façonnent, les désirs qu’on ose enfin écouter, et la magie d’un amour qui naît là où on ne l’attend pas.</p>
                 </div>
             </div>
         </div>
-    </main>
 
+        <section style="margin-top: 80px; padding: 20px; border-top: 1px solid #333;">
+            <h2 class="section-title">Reader Reviews</h2>
+            <div id="comments-list">
+                <p id="no-comments" style="text-align: center; color: var(--text-muted);">No reviews yet.</p>
+            </div>
+        </section>
+    </main>
 
     <main id="boutique" class="page">
         <h1 class="section-title">Full Catalog</h1>
@@ -344,9 +454,9 @@ Un roman tendre, sensuel et drôle, sur les liens qui nous façonnent, les dési
             <div class="book-slide active">
                 <div class="book-cover"><img src="images/evidence.jpg.png"></div>
                 <h3>The Piece Of Evidence</h3>
-                <p>28.95 $</p>
+                <p>$28.95</p>
                 <div class="btn-group">
-                    <button class="btn-cart" onclick="addToCart('The Piece Of Evidence', 28.95)">+ Panier</button>
+                    <button class="btn-cart" onclick="addToCart('The Piece Of Evidence', 28.95)">+ Add to Cart</button>
                     <a href="https://www.amazon.ca/dp/B0GTTZD5GV" target="_blank" class="btn-amazon">Amazon</a>
                 </div>
             </div>
@@ -354,36 +464,39 @@ Un roman tendre, sensuel et drôle, sur les liens qui nous façonnent, les dési
             <div class="book-slide">
                 <div class="book-cover"><img src="images/silenceeng.jpg.png"></div>
                 <h3>Silence Has A Price</h3>
-                <p>27.95 $</p>
+                <p>$27.95</p>
                 <div class="btn-group">
-                    <button class="btn-cart" onclick="addToCart('Silence Has A Price', 27.95)">+ Panier</button>
+                    <button class="btn-cart" onclick="addToCart('Silence Has A Price', 27.95)">+ Add to Cart</button>
                     <a href="https://www.amazon.ca/dp/B0GV32RWSY" target="_blank" class="btn-amazon">Amazon</a>
                 </div>
             </div>
+
             <div class="book-slide">
-                <div class="book-cover"><img src="images/rulle.jpg.png"></div>
+                <div class="book-cover"><img src="images/rule.jpg.png"></div>
                 <h3>An Unwritten Rule</h3>
-                <p>27.95 $</p>
+                <p>$27.95</p>
                 <div class="btn-group">
-                    <button class="btn-cart" onclick="addToCart('An Unwritten Rule', 27.95)">+ Panier</button>
+                    <button class="btn-cart" onclick="addToCart('An Unwritten Rule', 27.95)">+ Add to Cart</button>
                     <a href="https://www.amazon.ca/" target="_blank" class="btn-amazon">Amazon</a>
                 </div>
             </div>
-                        <div class="book-slide">
+
+            <div class="book-slide">
                 <div class="book-cover"><img src="images/player.jpg.png"></div>
                 <h3>A Life In Multiplayer Mode</h3>
-                <p>21.95 $</p>
+                <p>$21.95</p>
                 <div class="btn-group">
-                    <button class="btn-cart" onclick="addToCart('A Life In Multiplayer Mode', 21.95)">+ Panier</button>
+                    <button class="btn-cart" onclick="addToCart('A Life In Multiplayer Mode', 21.95)">+ Add to Cart</button>
                     <a href="https://www.amazon.ca/" target="_blank" class="btn-amazon">Amazon</a>
                 </div>
             </div>
-                <div class="book-slide">
+
+            <div class="book-slide">
                 <div class="book-cover"><img src="images/piece.jpg.png"></div>
                 <h3>La Pièce À Conviction</h3>
-                <p>26.95 $</p>
+                <p>$26.95</p>
                 <div class="btn-group">
-                    <button class="btn-cart" onclick="addToCart('La Pièce À Conviction', 26.95)">+ Panier</button>
+                    <button class="btn-cart" onclick="addToCart('La Pièce À Conviction', 26.95)">+ Add to Cart</button>
                     <a href="https://www.amazon.ca/dp/B0GLJHVSCH" target="_blank" class="btn-amazon">Amazon</a>
                 </div>
             </div>
@@ -391,19 +504,19 @@ Un roman tendre, sensuel et drôle, sur les liens qui nous façonnent, les dési
             <div class="book-slide">
                 <div class="book-cover"><img src="images/silence.jpg.png"></div>
                 <h3>Le Silence A Un Prix</h3>
-                <p>25.95 $</p>
+                <p>$25.95</p>
                 <div class="btn-group">
-                    <button class="btn-cart" onclick="addToCart('Le Silence A Un Prix', 25.95)">+ Panier</button>
+                    <button class="btn-cart" onclick="addToCart('Le Silence A Un Prix', 25.95)">+ Add to Cart</button>
                     <a href="https://www.amazon.ca/dp/B0GRQYXVNB" target="_blank" class="btn-amazon">Amazon</a>
                 </div>
             </div>
 
             <div class="book-slide">
-                <div class="book-cover"><img src="images/Reggle.jpg.png"></div>
+                <div class="book-cover"><img src="images/regle.jpg.png"></div>
                 <h3>La Règle Non Écrite</h3>
-                <p>25.95 $</p>
+                <p>$25.95</p>
                 <div class="btn-group">
-                    <button class="btn-cart" onclick="addToCart('La Règle Non Écrite', 25.95)">+ Panier</button>
+                    <button class="btn-cart" onclick="addToCart('La Règle Non Écrite', 25.95)">+ Add to Cart</button>
                     <a href="https://www.amazon.ca" target="_blank" class="btn-amazon">Amazon</a>
                 </div>
             </div>
@@ -411,9 +524,9 @@ Un roman tendre, sensuel et drôle, sur les liens qui nous façonnent, les dési
             <div class="book-slide">
                 <div class="book-cover"><img src="images/multip.jpg.jpg"></div>
                 <h3>Une Vie En Mode Multijoueur</h3>
-                <p>20.95 $</p>
+                <p>$20.95</p>
                 <div class="btn-group">
-                    <button class="btn-cart" onclick="addToCart('Une Vie En Mode Multijoueur', 20.95)">+ Panier</button>
+                    <button class="btn-cart" onclick="addToCart('Une Vie En Mode Multijoueur', 20.95)">+ Add to Cart</button>
                     <a href="https://www.amazon.ca/dp/B0GV8C89MF" target="_blank" class="btn-amazon">Amazon</a>
                 </div>
             </div>
@@ -421,51 +534,31 @@ Un roman tendre, sensuel et drôle, sur les liens qui nous façonnent, les dési
     </main>
 
     <main id="auteur" class="page">
-                        <div style="text-align: center; margin-top: 50px;">
+        <div style="text-align: center; margin-top: 50px;">
                 <img src="images/Logo.jpg.jpeg" alt="LDR Edition Logo" style="max-width: 180px; height: auto; opacity: 0.9; border-radius: 8px;">
             </div>
     <h2 class="section-title">Charles Lane D. Roches</h2>
-
-        <div class="content-body">
-            <h3 style="color: var(--accent-red); margin-top: 30px;">The boldness to write, the strength to persevere</h3>
-            <p>Behind every great thriller lies a truth that is often simpler, yet more powerful: determination. For me, writing is not just a passion; it is the result of a journey built on perseverance.</p>
-            
-            <p>Inspired by figures of tenacity like Martin St-Louis, I chose to blaze my own trail in the publishing world. Armed with an AEC degree and an iron will, I founded <strong>LDR Publishing</strong> to offer readers stories that make no compromises.</p>
+    
+    <div class="content-body">
+            <h3 style="color: var(--accent-red); margin-top: 30px;">The audacity to write, the strength to persevere</h3>
+            <p>Behind every great thriller hides a truth often simpler, but more powerful: that of determination. For me, writing is not just a passion, it's the result of a journey built on perseverance.</p>
+            <p>Inspired by figures of tenacity like Martin St-Louis, I chose to forge my own path in the publishing world. A graduate with an AEC and driven by an iron will, I founded <strong>LDR Edition</strong> to offer readers stories that make no compromises.</p>
             
             <h3 style="color: var(--accent-red); margin-top: 30px;">A dark and authentic universe</h3>
             <p>Specializing in psychological thrillers, suspense, and dark romance, my work explores the deepest corners of the human soul. My goal is simple: to keep you captive until the very last line.</p>
-        
+
             <h3 style="color: var(--accent-red); margin-top: 30px;">The Quebec signature</h3>
-            <p>As an independent author, I make it a priority to preserve the authenticity of our culture. My stories are rooted in a purely Quebec reality, featuring the language and expressions that define us.</p>
+            <p>As an independent author, I make it a point of honor to preserve the authenticity of our culture. My stories are anchored in a purely Quebecois reality, with language and expressions that reflect who we are.</p>
         </div>
     </main>
 
-    <main id="auteur" class="page">
-        <h2 class="section-title">Charles Lane D. Roches</h2>
-        
-       <div style="text-align: center; margin-top: 50px;">
-                <img src="images/Logo.jpg.jpeg" alt="LDR Edition Logo" style="max-width: 180px; height: auto; opacity: 0.9; border-radius: 8px;">
-            </div>
-
-        <div class="content-body">
-            <p>Behind every great thriller lies a truth that is often simpler, but more powerful: determination. For me, writing is not just a passion; it is the result of a journey built on perseverance.</p>
-            <p>Inspired by figures of tenacity like Martin St-Louis, I chose to blaze my own trail in the publishing world. Driven by an iron will, I founded <strong>LDR Edition</strong> to offer readers stories that make no compromises.</p>
-            
-            <h3 style="color: var(--accent-red); margin-top: 30px;">A Dark and Authentic Universe</h3>
-            <p>Specializing in psychological thrillers, suspense, and dark romance, my work explores the deepest corners of the human soul. My goal is simple: to keep you captive until the very last line.</p>
-
-            <h3 style="color: var(--accent-red); margin-top: 30px;">The Quebec Signature</h3>
-            <p>As an independent author, I make it a point of honor to preserve the authenticity of our culture. My stories are anchored in a purely Quebecois reality, using the language and expressions that represent us.</p>
-        </div>
-    </main>
-
-   <main id="contact" class="page">
-    <h2 class="section-title">Call for New Authors</h2>
-          <div style="text-align: center; margin-top: 50px;">
+    <main id="contact" class="page">
+        <h1 class="section-title">Call for New Authors</h1>
+                       <div style="text-align: center; margin-top: 50px;">
                 <img src="images/Logo.jpg.jpeg" alt="LDR Edition Logo" style="max-width: 180px; height: auto; opacity: 0.9; border-radius: 8px;">
             </div>
         <div style="margin-top: 50px; border-top: 1px solid #333; padding-top: 40px;">
-
+    
     
     <div class="contact-container" style="text-align: center; border-left: none; border-bottom: 4px solid var(--accent-red);">
         <p style="font-size: 1.2rem; font-weight: bold; color: var(--text-main);">
@@ -473,7 +566,7 @@ Un roman tendre, sensuel et drôle, sur les liens qui nous façonnent, les dési
         </p>
         
         <p>
-            At <span style="color: var(--accent-red); font-weight: bold;">LDR Edition</span>, we are always looking for powerful stories rooted in Quebec reality. Whether you specialize in <span style="color: var(--accent-red); font-weight: bold;">psychological thrillers</span>, <span style="color: var(--accent-red); font-weight: bold;">suspense</span>, or <span style="color: var(--accent-red); font-weight: bold;">dark romance</span>, we want to read your work.
+            At <span style="color: var(--accent-red); font-weight: bold;">LDR Edition</span>, we are always looking for powerful stories anchored in Quebec reality. Whether you specialize in <span style="color: var(--accent-red); font-weight: bold;">psychological thrillers</span>, <span style="color: var(--accent-red); font-weight: bold;">suspense</span>, or <span style="color: var(--accent-red); font-weight: bold;">dark romance</span>, we want to read you.
         </p>
 
         <p style="font-style: italic; margin: 30px 0; color: var(--text-muted);">
@@ -489,11 +582,11 @@ Un roman tendre, sensuel et drôle, sur les liens qui nous façonnent, les dési
         <div class="contact-container">
             <div class="step-box">
                 <span class="step-title">Step 1: Email Subject</span>
-                <p>TITLE NAME - CATEGORY (Ex: Le Silence - Thriller)</p>
+                <p>BOOK TITLE - CATEGORY (Ex: The Silence - Thriller)</p>
             </div>
             <div class="step-box">
                 <span class="step-title">Step 2: Attach your manuscript</span>
-                <p><strong>Word</strong> format only, including a full synopsis.</p>
+                <p><strong>Word</strong> format only with complete synopsis included.</p>
             </div>
             <div class="step-box">
                 <span class="step-title">Step 3: Submit</span>
@@ -505,9 +598,9 @@ Un roman tendre, sensuel et drôle, sur les liens qui nous façonnent, les dési
     <main id="panier-page" class="page">
         <h2 class="section-title">Your Cart</h2>
         <div class="cart-container">
-            <div id="cart-items-list"><p style="text-align:center;">Your Cart Is Empty.</p></div>
-            <div class="cart-total">Total: <span id="cart-total-price">0.00</span> $</div>
-            <button class="btn-checkout" onclick="alert('Redirecting to secure payment...')">Proceed to Payment</button>
+            <div id="cart-items-list"><p style="text-align:center;">Your Cart is Empty.</p></div>
+            <div class="cart-total">Total: $<span id="cart-total-price">0.00</span></div>
+            <button class="btn-checkout" onclick="alert('Redirecting to secure payment...')">Proceed to Checkout</button>
         </div>
     </main>
 
@@ -517,10 +610,20 @@ Un roman tendre, sensuel et drôle, sur les liens qui nous façonnent, les dési
         <p>&copy; 2026 LDR Edition - Charles Lane D. Roches</p>
     </footer>
 
-      <script>
+    <script>
         let cart = [];
         let currentSlideIndex = 0;
         let currentSummaryIndex = 0;
+
+        // Load comments on page load
+        window.onload = function() {
+            const saved = localStorage.getItem('ldr_comments_final');
+            if (saved) {
+                document.getElementById('comments-list').innerHTML = saved;
+                const noComments = document.getElementById('no-comments');
+                if(noComments && document.querySelectorAll('.comment-box').length > 0) noComments.remove();
+            }
+        };
 
         function showPage(pageId) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -543,55 +646,102 @@ Un roman tendre, sensuel et drôle, sur les liens qui nous façonnent, les dési
             slides[currentSummaryIndex].classList.add("active");
         }
 
-function addToCart(bookName, price) {
-    const tps = price * 0.05;
-    const tvq = price * 0.09975;
-    const priceWithTax = price + tps + tvq;
+        function addToCart(bookName, price) {
+            const tps = price * 0.05;
+            const tvq = price * 0.09975;
+            const priceWithTax = price + tps + tvq;
 
-    cart.push({
-        name: bookName, 
-        basePrice: price,
-        totalItemPrice: priceWithTax 
-    });
+            cart.push({
+                name: bookName, 
+                basePrice: price,
+                totalItemPrice: priceWithTax 
+            });
 
-    document.getElementById('cart-count').innerText = cart.length;
-    
-    const note = document.getElementById('cart-notification');
-    note.innerText = bookName + " ajouté !";
-    note.style.display = 'block';
-    setTimeout(() => note.style.display = 'none', 2000);
-}
-function removeFromCart(index) {
-    cart.splice(index, 1); // Retire l'élément à l'index donné
-    document.getElementById('cart-count').innerText = cart.length;
-    updateCartDisplay(); // Relance l'affichage et le calcul du total
-}function updateCartDisplay() {
-    const list = document.getElementById('cart-items-list');
-    const totalDisplay = document.getElementById('cart-total-price');
-    
-    if (cart.length === 0) {
-        list.innerHTML = '<p style="text-align:center;">Votre Panier Est Vide.</p>';
-        totalDisplay.innerText = "0.00";
-        return;
-    }
+            document.getElementById('cart-count').innerText = cart.length;
+            
+            const note = document.getElementById('cart-notification');
+            note.innerText = bookName + " added!";
+            note.style.display = 'block';
+            setTimeout(() => note.style.display = 'none', 2000);
+        }
 
-    list.innerHTML = '';
-    let currentTotal = 0;
+        function removeFromCart(index) {
+            cart.splice(index, 1); 
+            document.getElementById('cart-count').innerText = cart.length;
+            updateCartDisplay(); 
+        }
 
-    cart.forEach((item, index) => {
-        currentTotal += item.totalItemPrice;
-        list.innerHTML += `
-            <div class="cart-item">
-                <span>${item.name} (Taxes incl.)</span>
-                <span>
-                    ${item.totalItemPrice.toFixed(2)} $ 
-                    <button onclick="removeFromCart(${index})" style="margin-left:10px; background:none; border:none; color:red; cursor:pointer;">[X]</button>
-                </span>
-            </div>`;
-    });
+        function updateCartDisplay() {
+            const list = document.getElementById('cart-items-list');
+            const totalDisplay = document.getElementById('cart-total-price');
+            
+            if (cart.length === 0) {
+                list.innerHTML = '<p style="text-align:center;">Your Cart is Empty.</p>';
+                totalDisplay.innerText = "0.00";
+                return;
+            }
 
-    totalDisplay.innerText = currentTotal.toFixed(2);
-}
+            list.innerHTML = '';
+            let currentTotal = 0;
+
+            cart.forEach((item, index) => {
+                currentTotal += item.totalItemPrice;
+                list.innerHTML += `
+                    <div class="cart-item">
+                        <span>${item.name} (Tax incl.)</span>
+                        <span>
+                            $${item.totalItemPrice.toFixed(2)}  
+                            <button onclick="removeFromCart(${index})" style="margin-left:10px; background:none; border:none; color:red; cursor:pointer;">[X]</button>
+                        </span>
+                    </div>`;
+            });
+
+            totalDisplay.innerText = currentTotal.toFixed(2);
+        }
+
+        // Manage comments
+        function addComment() {
+            const name = document.getElementById('reviewer-name').value || "Anonymous Reader";
+            const bookImg = document.getElementById('book-select').value;
+            const text = document.getElementById('comment-text').value;
+            const ratingInput = document.querySelector('input[name="rating"]:checked');
+
+            if (!ratingInput || text.trim() === "") { alert("Rating and text are required."); return; }
+
+            const stars = '★'.repeat(ratingInput.value) + '☆'.repeat(5 - ratingInput.value);
+            const list = document.getElementById('comments-list');
+            const noComments = document.getElementById('no-comments');
+            if(noComments) noComments.remove();
+
+            const div = document.createElement('div');
+            div.className = 'comment-box';
+            const imgHTML = bookImg ? `<img src="${bookImg}" class="comment-book-img">` : '';
+
+            div.innerHTML = `
+                ${imgHTML}
+                <div class="comment-content">
+                    <div style="font-weight:bold; color:var(--accent-red);">${name}</div>
+                    <div style="color:#ffcc00; margin-bottom:5px;">${stars}</div>
+                    <p style="margin:0; font-size:0.9rem;">${text.replace(/\n/g, '<br>')}</p>
+                    <button class="delete-btn" onclick="adminDelete(this)">Delete</button>
+                </div>
+            `;
+
+            list.prepend(div);
+            localStorage.setItem('ldr_comments_final', list.innerHTML);
+
+            document.getElementById('reviewer-name').value = '';
+            document.getElementById('comment-text').value = '';
+            ratingInput.checked = false;
+            alert("Review published!");
+        }
+
+        function adminDelete(btn) {
+            if (prompt("Admin code:") === "LDR2026") {
+                btn.closest('.comment-box').remove();
+                localStorage.setItem('ldr_comments_final', document.getElementById('comments-list').innerHTML);
+            }
+        }
     </script>
 </body>
 </html>
