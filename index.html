@@ -225,6 +225,27 @@
                <div style="text-align: center; margin-top: 50px;">
                 <img src="images/Logo.jpg.jpeg" alt="LDR Edition Logo" style="max-width: 180px; height: auto; opacity: 0.9; border-radius: 8px;">
             </div>
+                    <div style="max-width: 450px; margin: 30px auto; padding: 15px; background-color: var(--surface-color); border-radius: 8px; border: 1px solid #333;">
+                <h4 style="color: var(--accent-red); margin-top: 0; text-transform: uppercase; font-size: 0.9rem;">Exclusivités & Sorties</h4>
+                <form id="newsletter-form" onsubmit="subscribeNewsletter(event)" style="display: flex; gap: 5px;">
+                    <input type="email" id="email-input" placeholder="Votre courriel" required style="flex: 2; padding: 8px; background: #121212; border: 1px solid #444; color: #fff; border-radius: 4px; font-size: 0.85rem;">
+                    <button type="submit" class="btn-cart" style="flex: 1; padding: 8px; font-size: 0.7rem; border-radius: 4px;">S'inscrire</button>
+                </form>
+                <p id="newsletter-msg" style="color: #28a745; display: none; margin-top: 10px; font-size: 0.8rem; font-weight: bold;">Inscription réussie !</p>
+            </div>
+
+            <div style="max-width: 550px; margin: 30px auto; padding: 20px; background-color: var(--surface-color); border-radius: 8px; border-left: 4px solid var(--accent-red);">
+                <h3 style="margin-top: 0; font-size: 1.1rem;">Laissez un avis sur mes livres</h3>
+                <div class="rating" id="star-rating">
+                    <input type="radio" id="star5" name="rating" value="5"><label for="star5">★</label>
+                    <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>
+                    <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>
+                    <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>
+                    <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>
+                </div>
+                <textarea id="comment-text" rows="2" placeholder="Qu'avez-vous pensé de votre lecture ?" style="width: 100%; padding: 10px; margin-top: 10px; background: #121212; color: #fff; border: 1px solid #333; border-radius: 4px; font-family: inherit; resize: none; box-sizing: border-box;"></textarea>
+                <button onclick="addComment()" class="btn-cart" style="margin-top: 10px; width: 100%; padding: 10px; border-radius: 4px;">Publier mon avis</button>
+            </div>
     </section>
 </main>
 
