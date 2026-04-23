@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LDR Édition | Suspense & Thrillers</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --surface-color: #1e1e1e;
+            --text-main: #f0f0f0;
+            --text-muted: #aaaaaa;
+            --accent-red: #8b0000;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* --- EN-TÊTE ET NAVIGATION --- */
+        header {
+            background-color: #000000;
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--accent-red);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-family: Georgia, serif;
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: var(--text-main);
+            cursor: pointer;
+        }
+
+        .logo span { color: var(--accent-red); }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover { color: var(--accent-red); }
+
+        /* --- GESTION DES PAGES --- */
+        .page { display: none; padding-top: 20px; }
+        .page.active { display: block; }
+
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9));
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin: 40px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #fff;
+        }
+
+        /* --- SYSTÈME D'AVIS --- */
+        .rating { direction: rtl; display: inline-block; font-size: 25px; }
+        .rating input { display: none; }
+        .rating label { color: #444; cursor: pointer; transition: 0.2s; padding: 0 2px; }
+        .rating label:hover, .rating label:hover ~ label, .rating input:checked ~ label { color: #ffcc00; }
+        
+        .comment-box { 
+            background: rgba(255,255,255,0.05); 
+            padding: 20px; 
+            margin-top: 15px; 
+            border-left: 4px solid var(--accent-red); 
+            position: relative; 
+            border-radius: 4px;
+            text-align: left;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .delete-btn { 
+            position: absolute; 
+            top: 15px; 
+            right: 15px; 
+            background: rgba(139, 0, 0, 0.4); 
+            color: white; 
+            border: none; 
+            cursor: pointer; 
+            border-radius: 4px; 
+            padding: 3px 8px; 
+            font-size: 0.7rem;
+        }
+        .delete-btn:hover { background: #ff0000; }
+
+        /* --- CARROUSEL BOUTIQUE --- */
+        .carousel-container {
+            position: relative;
+            max-width: 450px;
+            margin: 0 auto 80px;
+            z-index: 10;
+        }
+
+        .book-slide {
+            display: none;
+            background-color: var(--surface-color);
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .book-slide.active { display: block; }
+
+        .book-cover {
+            width: 100%;
+            height: 450px;
+            background-color: #000; 
+            margin-bottom: 20px;
+            display: flex; align-items: center; justify-content: center;
+            border: 1px solid #333;
+        }
+
+        .book-cover img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+        /* --- CARROUSEL RÉSUMÉS (Large) --- */
+        .summary-container {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto 80px;
+        }
+
+        .summary-slide {
+            display: none;
+            background-color: var(--surface-color);
+            padding: 40px;
+            border-radius: 8px;
+            animation: fadeIn 0.5s ease-in-out;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .summary-slide.active { display: flex; gap: 30px; align-items: center; }
+
+        .summary-image { flex: 1; max-width: 300px; }
+        .summary-image img { width: 100%; border-radius: 4px; }
+        .summary-text { flex: 2; text-align: left; }
+        .summary-text h2 { color: var(--accent-red); margin-top: 0; text-transform: uppercase; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .prev, .next {
+            cursor: pointer; position: absolute; top: 50%; transform: translateY(-50%);
+            width: auto; padding: 16px; color: white; font-weight: bold; font-size: 24px;
+            background-color: rgba(0,0,0,0.8); border: none; border-radius: 5px; z-index: 100;
+            transition: 0.3s;
+        }
+
+        .prev { left: -60px; }
+        .next { right: -60px; }
+        .prev:hover, .next:hover { background-color: var(--accent-red); }
+
+        .btn-group { display: flex; gap: 10px; margin-top: 15px; }
+        
+        .btn-cart, .btn-amazon {
+            flex: 1; background-color: transparent; color: var(--text-main);
+            border: 1px solid var(--accent-red); padding: 12px 5px;
+            text-decoration: none; text-transform: uppercase; font-size: 0.8rem;
+            font-weight: bold; cursor: pointer; transition: 0.3s; text-align: center;
+        }
+        
+        .btn-cart:hover { background-color: var(--accent-red); }
+        .btn-amazon { border-color: #ff9900; color: #ff9900; }
+        .btn-amazon:hover { background-color: #ff9900; color: #000; }
+
+        /* --- PANIER --- */
+        .cart-container { max-width: 800px; margin: 0 auto 80px; padding: 40px; background-color: var(--surface-color); }
+        .cart-item { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #333; }
+        .cart-total { text-align: right; font-size: 1.5rem; margin-top: 20px; font-weight: bold; }
+        .btn-checkout { width: 100%; background-color: #28a745; color: white; padding: 20px; text-transform: uppercase; font-weight: bold; border: none; cursor: pointer; margin-top: 30px; }
+
+        footer { background-color: #000; text-align: center; padding: 40px; border-top: 1px solid #222; }
+        #cart-notification { position: fixed; bottom: 20px; right: 20px; background: #28a745; color: white; padding: 15px 25px; border-radius: 4px; display: none; z-index: 2000; }
+
+        @media (max-width: 768px) {
+            header { flex-direction: column; padding: 15px; }
+            nav { margin-top: 15px; justify-content: center; }
+            nav a { margin: 5px 10px; }
+            .summary-slide.active { flex-direction: column; text-align: center; }
+            .prev { left: 0; } .next { right: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo" onclick="showPage('accueil')">LDR <span>Édition</span></div>
+        <nav>
+            <a href="#" onclick="showPage('accueil'); return false;">Accueil</a>
+            <a href="#" onclick="showPage('boutique'); return false;">Boutique</a>
+            <a href="#" onclick="showPage('resumes'); return false;">Résumés</a>
+            <a href="#" onclick="showPage('auteur'); return false;">L'Auteur</a>
+            <a href="#" onclick="showPage('contact'); return false;">Contact</a>
+            <a href="#" onclick="showPage('panier-page'); return false;">🛒 Panier (<span id="cart-count">0</span>)</a>
+            <a href="english.html" style="color: var(--accent-red); font-weight: bold;">FR / EN</a>
+        </nav>
+    </header>
+
+    <main id="accueil" class="page active">
+        <section class="hero">
+            <h1>Mon Univers & My Universe</h1>
+            <h2 style="color: var(--accent-red); margin-top: 20px;">La Persévérance Au Service Du Suspense & De L'Amour.</h2>
+            
+            <div style="max-width: 450px; margin: 30px auto; padding: 15px; background-color: var(--surface-color); border-radius: 8px; border: 1px solid #333;">
+                <h4 style="color: var(--accent-red); margin-top: 0; text-transform: uppercase; font-size: 0.9rem;">Exclusivités & Sorties</h4>
+                <form id="newsletter-form" onsubmit="subscribeNewsletter(event)" style="display: flex; gap: 5px;">
+                    <input type="email" id="email-input" placeholder="Votre courriel" required style="flex: 2; padding: 8px; background: #121212; border: 1px solid #444; color: #fff; border-radius: 4px; font-size: 0.85rem;">
+                    <button type="submit" class="btn-cart" style="flex: 1; padding: 8px; font-size: 0.7rem; border-radius: 4px;">S'inscrire</button>
+                </form>
+                <p id="newsletter-msg" style="color: #28a745; display: none; margin-top: 10px; font-size: 0.8rem; font-weight: bold;">Inscription réussie !</p>
+            </div>
+
+            <div style="max-width: 550px; margin: 30px auto; padding: 20px; background-color: var(--surface-color); border-radius: 8px; border-left: 4px solid var(--accent-red);">
+                <h3 style="margin-top: 0; font-size: 1.1rem;">Laissez un avis sur mes livres</h3>
+                <div class="rating" id="star-rating">
+                    <input type="radio" id="star5" name="rating" value="5"><label for="star5">★</label>
+                    <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>
+                    <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>
+                    <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>
+                    <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>
+                </div>
+                <textarea id="comment-text" rows="2" placeholder="Qu'avez-vous pensé de votre lecture ?" style="width: 100%; padding: 10px; margin-top: 10px; background: #121212; color: #fff; border: 1px solid #333; border-radius: 4px; font-family: inherit; resize: none; box-sizing: border-box;"></textarea>
+                <button onclick="addComment()" class="btn-cart" style="margin-top: 10px; width: 100%; padding: 10px; border-radius: 4px;">Publier mon avis</button>
+            </div>
+
+            <div style="display: flex; justify-content: center; gap: 15px; margin-top: 20px;">
+                <button class="btn-cart" onclick="showPage('boutique')" style="width: 180px; padding: 12px; font-size: 0.8rem;">Boutique</button>
+                <button class="btn-cart" onclick="showPage('resumes')" style="width: 180px; padding: 12px; font-size: 0.8rem;">Intrigues</button>
+            </div>
+
+            <div style="text-align: center; margin-top: 30px;">
+                <img src="images/Logo.jpg.jpeg" alt="LDR Edition Logo" style="max-width: 140px; height: auto; opacity: 0.8; border-radius: 8px;">
+            </div>
+        </section>
+    </main>
+
+    <main id="resumes" class="page">
+        <h1 class="section-title">Les Intrigues</h1>
+        <div class="summary-container">
+            <button class="prev" onclick="changeSummarySlide(-1)">&#10094;</button>
+            <button class="next" onclick="changeSummarySlide(1)">&#10095;</button>
+
+            <div class="summary-slide active">
+                <div class="summary-image"><img src="images/piece.jpg.png" alt="La Pièce À Conviction"></div>
+                <div class="summary-text">
+                    <h2>La Pièce À Conviction</h2>
+                    <p><strong>L'Affaire Jefferson - Tome 1</strong></p>
+                    <p>Jefferson Saint-Louis, un homme qui ne vit que sur l'adrénaline, est un membre du crime organisé...</p>
+                </div>
+            </div>
+            <div class="summary-slide">
+                <div class="summary-image"><img src="images/silence.jpg.png" alt="Le Silence A Un Prix"></div>
+                <div class="summary-text">
+                    <h2>Le Silence A Un Prix</h2>
+                    <p><strong>L'Affaire Jefferson - Tome 2</strong></p>
+                    <p>La frontière entre vérité et mensonge n’a jamais été aussi fragile...</p>
+                </div>
+            </div>
+            </div>
+
+        <div style="max-width: 900px; margin: 40px auto; text-align: center;">
+            <h2 class="section-title" style="font-size: 1.5rem; margin-bottom: 20px;">Ce que disent les lecteurs</h2>
+            <div id="comments-list">
+                <p id="no-comments" style="color: var(--text-muted);">Aucun avis pour le moment. Laissez le vôtre sur l'accueil !</p>
+            </div>
+        </div>
+    </main>
+
+    <main id="boutique" class="page">
+        <h1 class="section-title">Catalogue complet</h1>
+        <div class="carousel-container">
+            <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+            <button class="next" onclick="changeSlide(1)">&#10095;</button>
+            <div class="book-slide active">
+                <div class="book-cover"><img src="images/piece.jpg.png"></div>
+                <h3>La Pièce À Conviction</h3>
+                <p>26.95 $</p>
+                <div class="btn-group">
+                    <button class="btn-cart" onclick="addToCart('La Pièce À Conviction', 26.95)">+ Panier</button>
+                    <a href="https://www.amazon.ca/dp/B0GLJHVSCH" target="_blank" class="btn-amazon">Amazon</a>
+                </div>
+            </div>
+            </div>
+    </main>
+
+    <main id="auteur" class="page">
+        <div style="text-align: center; margin-top: 50px;">
+            <img src="images/Logo.jpg.jpeg" alt="LDR Edition Logo" style="max-width: 180px; height: auto; opacity: 0.9; border-radius: 8px;">
+        </div>
+        <h2 class="section-title">Charles Lane D. Roches</h2>
+        <div class="content-body">
+            <h3 style="color: var(--accent-red); margin-top: 30px;">L'audace d'écrire, la force de persévérer</h3>
+            <p>Inspiré par des figures de ténacité comme Martin St-Louis, j'ai choisi de tracer mon propre chemin...</p>
+        </div>
+    </main>
+
+    <main id="contact" class="page">
+        <h1 class="section-title">Appel aux Nouveaux Auteurs</h1>
+        <div class="contact-container">
+            <div class="step-box">
+                <span class="step-title">Étape 3 : Soumettre</span>
+                <a href="mailto:c.lanedesroches@gmail.com" class="email-link">c.lanedesroches@gmail.com</a>
+            </div>
+        </div>
+    </main>
+
+    <main id="panier-page" class="page">
+        <h2 class="section-title">Votre Panier</h2>
+        <div class="cart-container">
+            <div id="cart-items-list"><p style="text-align:center;">Votre Panier Est Vide.</p></div>
+            <div class="cart-total">Total: <span id="cart-total-price">0.00</span> $</div>
+            <button class="btn-checkout" onclick="alert('Redirection vers le paiement sécurisé...')">Procéder au Paiement</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 LDR Édition - Charles Lane D. Roches</p>
+    </footer>
+
+    <div id="cart-notification">Article Ajouté !</div>
+
+    <script>
+        let cart = [];
+        let currentSlideIndex = 0;
+        let currentSummaryIndex = 0;
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0, 0);
+            if(pageId === 'panier-page') updateCartDisplay();
+        }
+
+        // --- CARROUSELS ---
+        function changeSlide(n) {
+            const slides = document.querySelectorAll(".book-slide");
+            slides[currentSlideIndex].classList.remove("active");
+            currentSlideIndex = (currentSlideIndex + n + slides.length) % slides.length;
+            slides[currentSlideIndex].classList.add("active");
+        }
+
+        function changeSummarySlide(n) {
+            const slides = document.querySelectorAll(".summary-slide");
+            slides[currentSummaryIndex].classList.remove("active");
+            currentSummaryIndex = (currentSummaryIndex + n + slides.length) % slides.length;
+            slides[currentSummaryIndex].classList.add("active");
+        }
+
+        // --- PANIER ---
+        function addToCart(bookName, price) {
+            const priceWithTax = price * 1.14975;
+            cart.push({ name: bookName, totalItemPrice: priceWithTax });
+            document.getElementById('cart-count').innerText = cart.length;
+            const note = document.getElementById('cart-notification');
+            note.style.display = 'block';
+            setTimeout(() => note.style.display = 'none', 2000);
+        }
+
+        function updateCartDisplay() {
+            const list = document.getElementById('cart-items-list');
+            const totalDisplay = document.getElementById('cart-total-price');
+            if (cart.length === 0) {
+                list.innerHTML = '<p style="text-align:center;">Votre Panier Est Vide.</p>';
+                totalDisplay.innerText = "0.00";
+                return;
+            }
+            list.innerHTML = '';
+            let currentTotal = 0;
+            cart.forEach((item, index) => {
+                currentTotal += item.totalItemPrice;
+                list.innerHTML += `<div class="cart-item"><span>${item.name}</span><span>${item.totalItemPrice.toFixed(2)} $</span></div>`;
+            });
+            totalDisplay.innerText = currentTotal.toFixed(2);
+        }
+
+        // --- INFOLETTRE ---
+        function subscribeNewsletter(e) {
+            e.preventDefault();
+            document.getElementById('newsletter-msg').style.display = 'block';
+            document.getElementById('email-input').value = '';
+            setTimeout(() => { document.getElementById('newsletter-msg').style.display = 'none'; }, 4000);
+        }
+
+        // --- COMMENTAIRES ---
+        function addComment() {
+            const text = document.getElementById('comment-text').value;
+            const ratingInput = document.querySelector('input[name="rating"]:checked');
+            
+            if (!ratingInput || text.trim() === "") {
+                alert("Donnez une note et écrivez votre avis.");
+                return;
+            }
+
+            const rating = ratingInput.value;
+            const starsHTML = '★'.repeat(rating) + '<span style="color: #444;">' + '★'.repeat(5 - rating) + '</span>';
+            
+            const list = document.getElementById('comments-list');
+            const noComments = document.getElementById('no-comments');
+            if(noComments) noComments.remove();
+
+            const commentDiv = document.createElement('div');
+            commentDiv.className = 'comment-box';
+            commentDiv.innerHTML = `
+                <div style="color: #ffcc00; font-size: 1.2rem; margin-bottom: 8px;">${starsHTML}</div>
+                <p style="margin: 0; font-size: 0.95rem;">${text.replace(/\n/g, '<br>')}</p>
+                <button class="delete-btn" onclick="adminDelete(this)">Effacer (Admin)</button>
+            `;
+            
+            list.prepend(commentDiv);
+            document.getElementById('comment-text').value = '';
+            ratingInput.checked = false;
+            alert("Merci ! Votre avis a été ajouté à la page des intrigues.");
+        }
+
+        function adminDelete(btn) {
+            const password = prompt("Code administrateur requis :");
+            if (password === "LDR2026") {
+                btn.parentElement.remove();
+            } else {
+                alert("Code incorrect.");
+            }
+        }
+    </script>
+</body>
+</html>
