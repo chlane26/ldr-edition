@@ -274,20 +274,18 @@
         </nav>
     </header>
 
-       <main id="accueil" class="page active">
+    <main id="accueil" class="page active">
         <section class="hero">
-	<div style="text-align: center; margin-top: 50px;">
+            <div style="text-align: center; margin-top: 50px;">
                 <img src="images/Logo.jpg.jpeg" alt="LDR Edition Logo" style="max-width: 180px; height: auto; opacity: 0.9; border-radius: 8px;">
             </div>
             <h1>My Universe & Mon Univers</h1>
             <h2 style="color: var(--accent-red); margin-top: 30px;">Perseverance in the Service of Suspense & Love.</h2>
             
-            <div style="max-width: 450px; margin: 30px auto; padding: 15px; background-color: var(--surface-color); border-radius: 8px; border: 1px solid #333;">
+            <div style="max-width: 450px; margin: 30px auto; padding: 15px; background-color: var(--surface-color); border-radius: 8px; border: 1px solid #333; text-align: center;">
                 <h4 style="color: var(--accent-red); margin-top: 0; text-transform: uppercase; font-size: 0.9rem;">Exclusives & New Releases</h4>
-                <form action="https://formspree.io/f/VOTRE_ID" method="POST" style="display: flex; gap: 5px;">
-                    <input type="email" name="email" placeholder="Your email" required style="flex: 2; padding: 8px; background: #121212; border: 1px solid #444; color: #fff; border-radius: 4px;">
-                    <button type="submit" class="btn-cart" style="flex: 1; padding: 8px; font-size: 0.7rem;">Subscribe</button>
-                </form>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px;">Register for exclusive content and LDR Edition contests.</p>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd0Mh-O7xXpDeG96Pjnrb3rhm4f85-P3CGctTnFwQZw98delw/viewform" target="_blank" class="btn-cart" style="display: block; padding: 12px; font-size: 0.9rem; text-decoration: none;">Subscribe</a>
             </div>
 
             <div style="max-width: 550px; margin: 30px auto; padding: 25px; background-color: var(--surface-color); border-radius: 8px; border-left: 4px solid var(--accent-red);">
@@ -306,8 +304,7 @@
                     <option value="images/regle.jpg.png">Une Règle Non Écrite</option>
                     <option value="images/multip.jpg.jpg">Une Vie En Mode Multijoueur</option>
                 </select>
-				
-
+                
                 <div class="rating">
                     <input type="radio" id="star5" name="rating" value="5"><label for="star5">★</label>
                     <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>
@@ -315,11 +312,6 @@
                     <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>
                     <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>
                 </div>
-                <textarea id="comment-text" rows="2" class="input-avis" placeholder="What did you think?"></textarea>
-            <button onclick="addComment()" class="btn-cart" style="width: 100%; margin-bottom: 20px;">Publish my review</button>
-        </div>
-    </section>
-
                 <textarea id="comment-text" rows="2" class="input-avis" placeholder="What did you think?"></textarea>
                 <button onclick="addComment()" class="btn-cart" style="width: 100%;">Publish my review</button>
             </div>
@@ -753,6 +745,3 @@ Un roman tendre, sensuel et drôle, sur les liens qui nous façonnent, les dési
     </script>
 </body>
 </html>
-
-
-
