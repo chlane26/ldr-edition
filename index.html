@@ -227,6 +227,15 @@
             color: #000; 
             transform: translateY(-3px); 
         }
+		.subtitle-promo {
+		    color: #ff0000; /* Rouge vif */
+		    font-size: 1.1rem;
+		    font-weight: bold;
+		    text-align: center;
+		    margin-top: -10px; /* Pour le rapprocher un peu du titre principal */
+		    margin-bottom: 20px;
+		    text-transform: uppercase; /* Optionnel : pour donner un look plus "annonce" */
+		}
 
         /* --- PANIER --- */
         .cart-container { max-width: 800px; margin: 0 auto 80px; padding: 40px; background-color: var(--surface-color); }
@@ -460,6 +469,7 @@ A tender, sensual, and witty novel about the bonds that shape us, the desires we
 
     <main id="boutique" class="page">
         <h1 class="section-title">Catalogue complet</h1>
+		<p class="subtitle-promo">Inclut shipping, dédicace personnalisée et signet</p>
         <div class="carousel-container">
             <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
             <button class="next" onclick="changeSlide(1)">&#10095;</button>
