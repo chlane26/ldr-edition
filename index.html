@@ -236,6 +236,189 @@
 		    margin-bottom: 20px;
 		    text-transform: uppercase; /* Optionnel : pour donner un look plus "annonce" */
 		}
+		/* Base de la section */
+.ldr-services-section {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  color: #222;
+  background-color: #fafafa;
+  padding: 60px 20px;
+  line-height: 1.6;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Introduction */
+.ldr-intro {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.ldr-intro h2 {
+  font-size: 2.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.ldr-intro .highlight {
+  color: #444; /* Un gris un peu plus doux pour le contraste */
+}
+
+.lead-text {
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto 10px auto;
+  color: #555;
+}
+
+.strong-text {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #111;
+}
+
+/* Blocs standards */
+.ldr-block {
+  background: #fff;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+  margin-bottom: 40px;
+}
+
+.ldr-block h3, .ldr-split-section h3, .ldr-cta h3 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #222;
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Liste de ce qui est offert */
+.ldr-list {
+  list-style: none;
+  padding: 0;
+}
+
+.ldr-list li {
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+  padding-left: 30px;
+  position: relative;
+}
+
+.ldr-list li::before {
+  content: '■'; /* Carré plein pour un look plus brut/moderne */
+  color: #111;
+  position: absolute;
+  left: 0;
+  font-size: 1.2rem;
+}
+
+/* Bloc "Pour qui" avec fond sombre */
+.ldr-dark-block {
+  background: #1a1a1a;
+  color: #f4f4f4;
+}
+
+.ldr-dark-block h3 {
+  border-bottom: 2px solid #f4f4f4;
+}
+
+.ldr-grid-3 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.grid-item {
+  flex: 1;
+  min-width: 250px;
+  text-align: center;
+  padding: 20px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 6px;
+}
+
+.grid-item .icon {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 15px;
+}
+
+.grid-item p {
+  font-size: 1.05rem;
+  margin: 0;
+}
+
+/* Section divisée (Différence et Confiance) */
+.ldr-split-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.split-box {
+  flex: 1;
+  min-width: 300px;
+  background: #fff;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+}
+
+.split-box p {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+/* Appel à l'action final */
+.ldr-cta {
+  text-align: center;
+  background: #ececec;
+  padding: 50px 20px;
+  border-radius: 8px;
+}
+
+.ldr-cta p {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+.cta-conclusion {
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+/* Bouton */
+.ldr-btn {
+  display: inline-block;
+  background: #111;
+  color: #fff;
+  text-decoration: none;
+  padding: 15px 40px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: 4px;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.ldr-btn:hover {
+  background: #333;
+  transform: translateY(-2px);
+}
 
         /* --- PANIER --- */
         .cart-container { max-width: 800px; margin: 0 auto 80px; padding: 40px; background-color: var(--surface-color); }
@@ -566,7 +749,66 @@ A tender, sensual, and witty novel about the bonds that shape us, the desires we
                 <img src="images/Logoclair.png" alt="LDR Édition Logo" style="max-width: 250px; height: auto; display: block; margin: 10px auto; filter: drop-shadow(0px 0px 10px rgba(180, 0, 0, 0.3));">
             </div>
     <h2 class="section-title">Charles Lane D. Roches</h2>
+    <section id="services-cle-en-main" class="ldr-services-section">
+  
+  <div class="ldr-intro">
+    <h2>Donne vie à ton histoire. <br><span class="highlight">Fais-la exister pour vrai.</span></h2>
+    <p class="lead-text">Tu as une idée. Un univers. Une histoire qui mérite d’être lue… mais tu ne sais pas par où commencer, ou comment passer au niveau supérieur.</p>
+    <p class="strong-text">C’est exactement là que j’interviens.</p>
+  </div>
+
+  <div class="ldr-block">
+    <h3>Ce que je t’offre</h3>
+    <p class="subtitle">Je ne fais pas juste “publier un livre”. Je transforme un projet en œuvre complète, prête à marquer les esprits.</p>
+    <ul class="ldr-list">
+      <li><strong>Accompagnement éditorial</strong> (structure, cohérence, impact)</li>
+      <li><strong>Création de couvertures</strong> professionnelles et visuelles fortes</li>
+      <li><strong>Mise en marché moderne</strong> (réseaux, image, positionnement)</li>
+      <li><strong>Stratégie</strong> pour te démarquer dans un marché saturé</li>
+      <li><strong>Vision globale</strong> pour faire évoluer ton projet, pas juste le lancer</li>
+    </ul>
+  </div>
+
+  <div class="ldr-block ldr-dark-block">
+    <h3>Pour qui ?</h3>
+    <div class="ldr-grid-3">
+      <div class="grid-item">
+        <span class="icon">🌱</span>
+        <p>Auteurs <strong>débutants</strong> qui veulent faire les choses sérieusement</p>
+      </div>
+      <div class="grid-item">
+        <span class="icon">🚀</span>
+        <p>Auteurs <strong>indépendants</strong> qui veulent passer à un autre niveau</p>
+      </div>
+      <div class="grid-item">
+        <span class="icon">👁️</span>
+        <p><strong>Créateurs</strong> avec une vision forte, mais sans structure</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="ldr-split-section">
+    <div class="split-box">
+      <h3>Ce qui fait la différence</h3>
+      <p>Ici, pas de modèle générique.</p>
+      <p>Chaque projet est travaillé avec une approche sur mesure, avec une seule idée en tête : <br><strong>faire en sorte que ton histoire ne passe pas inaperçue.</strong></p>
+    </div>
     
+    <div class="split-box">
+      <h3>Pourquoi me faire confiance ?</h3>
+      <p>Parce que je comprends autant l’écriture que l’image, le marketing et l’impact émotionnel.</p>
+      <p>Ton livre n’est pas juste un texte.<br><strong>C’est une expérience.</strong></p>
+    </div>
+  </div>
+
+  <div class="ldr-cta">
+    <h3>Prêt à en parler ?</h3>
+    <p>Si ton projet est sérieux et que tu veux lui donner une vraie direction, je t’invite à me contacter.</p>
+    <p class="cta-conclusion">On verra ensemble jusqu’où ton histoire peut aller.</p>
+    <a href="LIEN_VERS_TA_PAGE_CONTACT_OU_EMAIL" class="ldr-btn">Contacte-moi</a>
+  </div>
+
+</section>
     <div class="content-body">
             <h3 style="color: var(--accent-red); margin-top: 30px;">L'audace d'écrire, la force de persévérer</h3>
             <p>Derrière chaque grand thriller se cache une vérité souvent plus simple, mais plus puissante : celle de la détermination. Pour moi, l'écriture n'est pas seulement une passion, c'est le résultat d'un parcours bâti sur la persévérance.</p>
