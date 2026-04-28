@@ -558,67 +558,69 @@
         </div>
     </div>
 </section>
-		<style>
-.promo-section{
-    background:#090909;
-    padding:70px 20px;
+
+<style>
+.news-section{
+    background:#0f0f0f;
+    padding:80px 20px;
+    color:white;
 }
 
-.promo-container{
+.news-container{
     max-width:1200px;
     margin:auto;
-}
-
-.promo-box{
-    background:linear-gradient(135deg,#111,#1b1b1b);
-    border:1px solid #222;
-    border-radius:22px;
-    padding:60px 40px;
     text-align:center;
-    color:white;
-    box-shadow:0 15px 40px rgba(0,0,0,0.35);
 }
 
-.promo-tag{
-    display:inline-block;
-    background:#b30000;
-    color:white;
-    padding:8px 16px;
-    border-radius:50px;
-    font-size:13px;
-    font-weight:bold;
-    margin-bottom:20px;
-    letter-spacing:1px;
-}
-
-.promo-box h2{
+.news-container h2{
     font-size:42px;
-    margin-bottom:20px;
+    margin-bottom:10px;
+    letter-spacing:2px;
 }
 
-.promo-box p{
-    color:#ccc;
+.news-subtitle{
+    color:#aaa;
+    margin-bottom:50px;
     font-size:18px;
-    max-width:700px;
-    margin:auto;
-    line-height:1.7;
-    margin-bottom:30px;
 }
 
-.promo-btn{
-    display:inline-block;
-    padding:14px 32px;
-    background:#b30000;
-    color:white;
-    text-decoration:none;
-    border-radius:12px;
-    font-weight:bold;
+.news-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+}
+
+.news-card{
+    background:#181818;
+    padding:30px;
+    border-radius:18px;
+    text-align:left;
     transition:0.3s;
+    border:1px solid #222;
 }
 
-.promo-btn:hover{
-    background:#d40000;
-    transform:translateY(-3px);
+.news-card:hover{
+    transform:translateY(-8px);
+    border-color:#b30000;
+    box-shadow:0 15px 35px rgba(179,0,0,0.25);
+}
+
+.news-date{
+    display:block;
+    color:#b30000;
+    font-size:14px;
+    margin-bottom:15px;
+    font-weight:bold;
+}
+
+.news-card h3{
+    font-size:24px;
+    margin-bottom:15px;
+}
+
+.news-card p{
+    color:#ccc;
+    line-height:1.6;
 }
 </style>
 		<!-- BABILLARD PARTENAIRES / SPONSORS -->
