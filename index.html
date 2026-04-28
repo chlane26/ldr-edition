@@ -133,7 +133,7 @@
             font-family: inherit; box-sizing: border-box;
         }
 
-        /* --- CARROUSEL BOUTIQUE --- */
+        /* --- CARROUSEL  --- */
         .carousel-container {
             position: relative;
             max-width: 450px;
@@ -464,6 +464,7 @@
         <div class="logo" onclick="showPage('accueil')">LDR <span>Édition</span></div>
         <nav>
             <a href="#" onclick="showPage('accueil'); return false;">Accueil</a>
+			<a href="#" onclick="showPage('news'); return false;">Nouvelles</a>
             <a href="#" onclick="showPage('boutique'); return false;">Boutique</a>
             <a href="#" onclick="showPage('resumes'); return false;">Résumés</a>
             <a href="#" onclick="showPage('auteur'); return false;">Les Auteurs</a>
@@ -535,7 +536,101 @@
             </div>
         </section>
     </main>
-
+					<main id="news" class="page">
+				<section class="news-section">
+		    <div class="news-container">
+		        <h2>Dernières Nouvelles</h2>
+		        <p class="news-subtitle">Restez informé des annonces de LDR Édition</p>
+		
+		        <div class="news-grid">
+		
+		            <div class="news-card">
+		                <span class="news-date">28 Avril 2026</span>
+		                <h3>Nouveau Roman Bientôt Disponible</h3>
+		                <p>Une nouvelle histoire captivante arrive très bientôt sur notre boutique.</p>
+		            </div>
+		
+		            <div class="news-card">
+		                <span class="news-date">20 Avril 2026</span>
+		                <h3>Concours Exclusif</h3>
+		                <p>Inscrivez-vous à notre infolettre pour participer à notre prochain concours.</p>
+		            </div>
+		
+		            <div class="news-card">
+		                <span class="news-date">10 Avril 2026</span>
+		                <h3>Refonte du Site</h3>
+		                <p>Notre nouveau site est maintenant en ligne avec une expérience premium.</p>
+		            </div>
+		
+		        </div>
+		    </div>
+				</section>
+				
+				<style>
+				.news-section{
+				    background:#0f0f0f;
+				    padding:80px 20px;
+				    color:white;
+				}
+				
+				.news-container{
+				    max-width:1200px;
+				    margin:auto;
+				    text-align:center;
+				}
+				
+				.news-container h2{
+				    font-size:42px;
+				    margin-bottom:10px;
+				    letter-spacing:2px;
+				}
+				
+				.news-subtitle{
+				    color:#aaa;
+				    margin-bottom:50px;
+				    font-size:18px;
+				}
+				
+				.news-grid{
+				    display:grid;
+				    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+				    gap:25px;
+				}
+				
+				.news-card{
+				    background:#181818;
+				    padding:30px;
+				    border-radius:18px;
+				    text-align:left;
+				    transition:0.3s;
+				    border:1px solid #222;
+				}
+				
+				.news-card:hover{
+				    transform:translateY(-8px);
+				    border-color:#b30000;
+				    box-shadow:0 15px 35px rgba(179,0,0,0.25);
+				}
+				
+				.news-date{
+				    display:block;
+				    color:#b30000;
+				    font-size:14px;
+				    margin-bottom:15px;
+				    font-weight:bold;
+				}
+				
+				.news-card h3{
+				    font-size:24px;
+				    margin-bottom:15px;
+				}
+				
+				.news-card p{
+				    color:#ccc;
+				    line-height:1.6;
+				}
+				</style>
+					</main>
     <main id="resumes" class="page">
         <h1 class="section-title">Les Intrigues</h1>
         <div class="summary-container">
